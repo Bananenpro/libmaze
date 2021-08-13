@@ -60,5 +60,5 @@ mkdir build && cd build
 cmake -DCMAKE_BUILD_TYPE=Release ..
 make
 ```
-##### Windows
+#### Windows
 ¯\\(o_o)/¯
