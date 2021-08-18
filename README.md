@@ -1,13 +1,13 @@
 # libmaze
 
-A simple C++ library for creating and solving mazes.
+A simple and extensible C++ library for creating and solving mazes.
 
 ### [Documentation](docs/Home.md)
 
 ### Features
 
 - [ ] Export mazes
-    - [ ] Exporter Interface
+    - [ ] Exporter interface
     - [ ] PNGExporter
         - Creates png image file showing the maze
         - Configurable colors?
@@ -16,11 +16,12 @@ A simple C++ library for creating and solving mazes.
     - [ ] JSONExporter
         - Creates json file representing the maze
 - [ ] Load mazes
-    - [ ] Loader Interface
+    - [ ] Loader interface
     - [ ] PNGLoader
         - Load png files created using `PNGExporter`
 - [ ] Create weighted graphs from mazes
 - [ ] Generate mazes
+    - [ ] Generator interface
     - [ ] [Randomized depth-first search](https://www.wikiwand.com/en/Maze_generation_algorithm#Randomized_depth-first_search)
     - [ ] [Wilson's algorithm](https://www.wikiwand.com/en/Maze_generation_algorithm#Wilson's_algorithm)
     - [ ] [Aldous-Broder algorithm](https://www.wikiwand.com/en/Maze_generation_algorithm#Aldous-Broder_algorithm)
@@ -30,6 +31,7 @@ A simple C++ library for creating and solving mazes.
     - [ ] [Simple algorithms](https://www.wikiwand.com/en/Maze_generation_algorithm#Simple_algorithms)
     - [ ] [Cellular automata](https://www.wikiwand.com/en/Maze_generation_algorithm#Cellular_automaton_algorithms)
 - [ ] Solve mazes
+    - [ ] Solver interface
     - [ ] [Breadth-first search](https://www.wikiwand.com/en/Breadth-first_search)
     - [ ] [Dijkstra's algorithm](https://www.wikiwand.com/en/Dijkstra's_algorithm)
     - [ ] [Bellman–Ford algorithm](https://www.wikiwand.com/en/Bellman–Ford_algorithm)
