@@ -2,7 +2,7 @@
 
 A simple C++ library for creating and solving mazes.
 
-### [Documentation](https://gitlab.com/Bananenpro05/libmaze/-/blob/main/docs/QuickStart.md)
+### [Documentation](docs/Home.md)
 
 ### Features
 
@@ -41,11 +41,11 @@ A simple C++ library for creating and solving mazes.
 ### Installing Dependencies
 #### ArchLinux
 ```
-sudo pacman -S libpng
+sudo pacman -S catch2
 ```
 #### Other
 Install the following libraries:
-- [libpng](http://www.libpng.org/pub/png/libpng.html)
+- [Catch2](https://github.com/catchorg/Catch2/tree/v2.x)
 
 ### Building
 #### Unix-like
@@ -53,6 +53,8 @@ Install the following libraries:
 - [git](https://git-scm.com/)
 - [cmake](https://cmake.org/)
 - [make](https://www.gnu.org/software/make/)
+
+Run the following commands (Change `Release` to `Debug` for debug build):
 ```
 git clone https://gitlab.com/Bananenpro05/libmaze.git
 cd libmaze
@@ -62,3 +64,12 @@ make
 ```
 #### Windows
 ¯\\(o_o)/¯
+
+### Running tests
+Run the following command in the build directory after building:
+```
+./tests
+```
+
+---
+Copyright © Julian Hofmann
