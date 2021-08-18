@@ -6,6 +6,7 @@ A simple and extensible C++ library for creating and solving mazes.
 
 ### Features
 
+- [x] Work with mazes through an easy to use class
 - [ ] Export mazes
     - [ ] Exporter interface
     - [ ] PNGExporter
