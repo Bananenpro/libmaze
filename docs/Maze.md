@@ -64,7 +64,7 @@ provides a few convenience functions for that:
 - `void setWallOfCell(const Point& point, Direction direction, bool value)`
 
 
-### Saving maze
+### Saving
 Mazes can be saved by passing an implementation of the [Exporter interface](Exporter.md)
 and the desired file path to the\
 `void save(const IExporter& exporter, std::string_view path) const`\
