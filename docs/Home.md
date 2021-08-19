@@ -2,7 +2,7 @@
 
 ### Basics
 - [Maze class](Maze.md)
-- [Exporter interface](Maze.md)
+- [Exporter interface](Exporter.md)
 
 ---
 Copyright © Julian Hofmann
