@@ -9,6 +9,7 @@ set(TEST_DIR tests)
 
 set(SRC
     ${SRC_DIR}/maze.cpp
+    ${SRC_DIR}/exporters/exporter.cpp
 )
 
 add_library(${PROJECT_NAME} SHARED ${SRC})

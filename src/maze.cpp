@@ -8,6 +8,7 @@
 // ********** Includes **********
 
 #include <stdexcept>
+#include <string_view>
 
 #include "maze.h"
 
@@ -170,6 +171,13 @@ void Maze::setWallOfCell(const Point& point, Direction direction, bool value)
     mData.at(getIndexOfWallOfCell(point, direction)) = value;
 }
 
+
+// ********** Other **********
+
+void Maze::save(const IExporter& exporter, std::string_view path) const
+{
+    exporter.save(*this, path);
+}
 
 // ==================== PRIVATE ====================
 

@@ -11,6 +11,8 @@
 
 #include <vector>
 
+#include "exporters/exporter.h"
+
 
 // ********** Structs/Enums **********
 
@@ -115,6 +117,10 @@ public:
      * @param value true for open wall
      */
     void setWallOfCell(const Point& point, Direction direction, bool value);
+
+    // ********** Other **********
+    
+    void save(const IExporter& exporter, std::string_view path) const;
 
 private:
     std::size_t getIndexOf(std::size_t pos, GridType gridType) const;
