@@ -3,6 +3,7 @@
 ### Basics
 - [Maze class](Maze.md)
 - [Exporter interface](Exporter.md)
+- [ProgressReporter class](ProgressReporter.md)
 
 ---
 [Go to README](../README.md)\
