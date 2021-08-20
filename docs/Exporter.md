@@ -13,9 +13,9 @@ IExporter inherits its callback capabilities from [ProgressReporter](ProgressRep
 A class that implements IExporter needs to define all of the below member functions:
 - `virtual void save(const Maze& maze, std::string_view path) const`
     - This method is responsible for saving the provided maze to disk
-    - This method should call all callback functions in `mCallbacks` as soon as
-        - The progress changed by more than `mCallbackPrecision` since the last callback call
-        - The last call was more than `mMaxCallbackInterval` milliseconds ago
+    - This method should call all callback functions in `callbacks` as soon as
+        - The progress changed by more than `callbackPrecision` since the last callback call
+        - The last call was more than `maxCallbackInterval` milliseconds ago
         - The stage changed
 
 ---
