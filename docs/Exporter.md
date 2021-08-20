@@ -1,4 +1,4 @@
-# Exporter interface
+# IExporter interface
 
 ### Saving a maze
 See [#Saving](Maze.md#saving) in the maze class docs
