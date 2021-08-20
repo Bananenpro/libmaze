@@ -2,7 +2,7 @@
 
 ### Basics
 - [Maze class](Maze.md)
-- [Exporter interface](Exporter.md)
+- [IExporter interface](Exporter.md)
 - [ProgressReporter class](ProgressReporter.md)
 
 ---
