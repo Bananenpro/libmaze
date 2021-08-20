@@ -9,7 +9,7 @@ set(TEST_DIR tests)
 
 set(SRC
     ${SRC_DIR}/maze.cpp
-    ${SRC_DIR}/exporters/exporter.cpp
+    ${SRC_DIR}/progress_reporter.cpp
 )
 
 add_library(${PROJECT_NAME} SHARED ${SRC})
@@ -19,6 +19,7 @@ find_package(Catch2 REQUIRED)
 set(TEST
     ${TEST_DIR}/tests.cpp
     ${TEST_DIR}/maze.cpp
+    ${TEST_DIR}/progress_reporter.cpp
 )
 add_executable(tests ${TEST})
 target_link_libraries(tests Catch2::Catch2 ${PROJECT_NAME})
