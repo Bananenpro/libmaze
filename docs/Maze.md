@@ -77,7 +77,7 @@ will result in a `std::runtime_error` exception being thrown.
 ### Saving
 Mazes can be saved by passing an implementation of the [IExporter interface](exporters/Exporter.md)
 and the desired file path to the\
-`void save(const IExporter& exporter, std::string_view path) const`\
+`void save(IExporter& exporter, std::string_view path) const`\
 member function.
 
 ---
