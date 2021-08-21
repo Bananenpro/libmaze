@@ -38,8 +38,39 @@ SCENARIO("Exporting maze")
 
         WHEN("Exporting the maze")
         {
+            float preparingProgress{};
+            float workingProgress{};
+            bool finished{};
+
+            exporter.addCallback([&preparingProgress, &workingProgress, &finished](PNGExporter::Stage stage, long millis, float progress)
+            {
+                if (progress < 0 || progress > 1)
+                    REQUIRE(progress == -99999);
+
+                switch(stage)
+                {
+                case PNGExporter::Stage::PREPARING:
+                    preparingProgress = progress;
+                    break;
+                case PNGExporter::Stage::WORKING:
+                    workingProgress = progress;
+                    break;
+                case PNGExporter::Stage::FINISHED:
+                    finished = true;
+                    break;
+                default:
+                    REQUIRE(false);
+                }
+            });
+
             maze.save(exporter, "maze.png");
 
+            THEN("All progress callbacks are working")
+            {
+                REQUIRE(preparingProgress == 1);
+                REQUIRE(workingProgress == 1);
+                REQUIRE(finished);
+            }
             // TODO: Verify the created file
         }
     }

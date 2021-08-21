@@ -72,9 +72,6 @@ void ProgressReporter::setStage(Stage stage)
     }
 }
 
-// =================== PROTECTED ====================
-
-
 void ProgressReporter::updateProgress(float progress)
 {
     if ((progress == 1 && mProgress < 1) || progress - mProgress >= mCallbackPrecision || currentTimeMillis() - mLastCallback > mMaxCallbackInterval)

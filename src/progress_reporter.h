@@ -71,7 +71,6 @@ public:
 
     void setStage(Stage stage);
 
-protected:
     /**
      * @param progress the progress of the current stage between 0 and 1
      */

@@ -4,8 +4,8 @@
  * @copyright   : Copyright © Julian Hofmann
  * @license     : MIT
  */
-#ifndef PNGEXPORTER_H
-#define PNGEXPORTER_H
+#ifndef PNG_EXPORTER_H
+#define PNG_EXPORTER_H
 
 // ********** Includes *********
 
@@ -42,5 +42,5 @@ private:
     void write(png_structp png, png_infop pngInfo, png_bytepp rows, const std::string& path);
 };
 
-#endif /* PNGEXPORTER_H */
+#endif /* PNG_EXPORTER_H */
 

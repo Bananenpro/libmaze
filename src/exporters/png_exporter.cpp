@@ -94,6 +94,8 @@ png_bytepp PNGExporter::generatePixelData(const Maze &maze)
 
             rows[y][x] = colorValue;
 
+            ++calculatedPixels;
+
             updateProgress((float)calculatedPixels / (float)maze.size(GridType::ALL));
         }
     }
@@ -111,6 +113,17 @@ void PNGExporter::write(png_structp png, png_infop pngInfo, png_bytepp rows, con
     {
         throw std::runtime_error("Couldn't open file '" + path + "' for writing'");
     }
+
+    png_uint_32 height{};
+    png_get_IHDR(png, pngInfo, nullptr, &height, nullptr, nullptr, nullptr, nullptr, nullptr);
+
+    static ProgressReporter progressReporter = *this;
+    static std::size_t rowCount = height;
+
+    png_set_write_status_fn(png, [](png_structp png_ptr, png_uint_32 row, int pass)
+    {
+        progressReporter.updateProgress((float)row / rowCount);
+    });
 
     png_init_io(png, fp);
     png_set_rows(png, pngInfo, rows);
