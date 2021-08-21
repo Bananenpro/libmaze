@@ -4,7 +4,7 @@ Implementation of [IExporter](Exporter.md) for saving mazes as *png* files.
 
 # Example usage
 ```c++
-Maze maze;
+Maze maze(100, 100);
 
 PNGExporter exporter;
 
