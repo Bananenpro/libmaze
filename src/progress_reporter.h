@@ -18,19 +18,20 @@ class ProgressReporter
 public:
     enum class Stage
     {
-        PREPARING, WORKING, FINISHED
+        NONE, PREPARING, WORKING, FINISHED
     };
 
     // void callback(Stage stage, long millis, float progress) <- progress: 0-100
     using callback_t = std::function<void(Stage, long, float)>;
 
-protected:
+private:
     std::vector<callback_t> mCallbacks;
+    long mStartTime{currentTimeMillis()};
+    long mLastCallback{};
     long mMaxCallbackInterval{1000};
     float mCallbackPrecision{0.01f};
-
-private:
-    Stage mCurrentStage{Stage::PREPARING};
+    Stage mStage{Stage::NONE};
+    float mProgress{0};
 
 public:
     virtual ~ProgressReporter() {}
@@ -49,7 +50,7 @@ public:
 
     std::size_t callbackCount() const;
 
-    Stage currentStage() const;
+    Stage stage() const;
 
 
     // ********** Setters **********
@@ -68,15 +69,17 @@ public:
 
     void clearCallbacks();
 
-    void setCurrentStage(Stage stage);
+    void setStage(Stage stage);
 
 protected:
     /**
-     * @param stage the current stage of operation
-     * @param millis the time in milliseconds since the start of the current stage
-     * @param progress the progress of the current stage between 0 (Nothing done yet) and 1 (Finished)
+     * @param progress the progress of the current stage between 0 and 1
      */
-    void callCallbacks(long millis, float progress) const;
+    void updateProgress(float progress);
+
+private:
+    void callCallbacks();
+    long currentTimeMillis() const;
 };
 
 #endif /* PROGRESS_REPORTER_H */

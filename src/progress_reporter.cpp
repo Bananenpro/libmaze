@@ -7,6 +7,8 @@
 
 // ********** Includes **********
 
+#include <chrono>
+
 #include "progress_reporter.h"
 
 
@@ -30,9 +32,9 @@ std::size_t ProgressReporter::callbackCount() const
     return mCallbacks.size();
 }
 
-ProgressReporter::Stage ProgressReporter::currentStage() const
+ProgressReporter::Stage ProgressReporter::stage() const
 {
-    return mCurrentStage;
+    return mStage;
 }
 
 
@@ -59,18 +61,42 @@ void ProgressReporter::clearCallbacks()
     mCallbacks.shrink_to_fit();
 }
 
-void ProgressReporter::setCurrentStage(Stage stage)
+void ProgressReporter::setStage(Stage stage)
 {
-    mCurrentStage = stage;
+    if (stage != mStage)
+    {
+        mStage = stage;
+        mProgress = mStage == Stage::FINISHED ? 1 : 0;
+        mStartTime = currentTimeMillis();
+        callCallbacks();
+    }
 }
 
-// =================== PUBLIC ====================
+// =================== PROTECTED ====================
 
 
-void ProgressReporter::callCallbacks(long millis, float progress) const
+void ProgressReporter::updateProgress(float progress)
+{
+    if ((progress == 1 && mProgress < 1) || progress - mProgress >= mCallbackPrecision || currentTimeMillis() - mLastCallback > mMaxCallbackInterval)
+    {
+        mProgress = progress;
+        callCallbacks();
+    }
+}
+
+// =================== PRIVATE ====================
+
+void ProgressReporter::callCallbacks()
 {
     for (callback_t cb : mCallbacks)
     {
-        cb(currentStage(), millis, progress);
+        cb(stage(), currentTimeMillis() - mStartTime, mProgress);
     }
+
+    mLastCallback = currentTimeMillis();
+}
+
+long ProgressReporter::currentTimeMillis() const
+{
+    return std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
 }

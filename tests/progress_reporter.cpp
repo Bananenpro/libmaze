@@ -19,8 +19,8 @@ SCENARIO("Registering and calling callbacks")
         public:
             void testCallbacks()
             {
-                setCurrentStage(Stage::WORKING);
-                callCallbacks(1000, 0.6f);
+                setStage(Stage::WORKING);
+                updateProgress(0.6f);
             }
         };
 
@@ -35,40 +35,26 @@ SCENARIO("Registering and calling callbacks")
 
         WHEN("Calling the callbacks with two registered callbacks")
         {
-            Test::Stage stage1{};
-            Test::Stage stage2{};
+            int callback1CallCount {0};
+            int callback2CallCount {0};
 
-            long millis1{};
-            long millis2{};
-
-            float progress1{};
-            float progress2{};
-
-            test.addCallback([&stage1, &millis1, &progress1](ProgressReporter::Stage stage, long millis, float progress) 
+            test.addCallback([&callback1CallCount](ProgressReporter::Stage stage, long millis, float progress) 
             {
-                stage1 = stage;
-                millis1 = millis;
-                progress1 = progress;
+                ++callback1CallCount;
             });
 
-            test.addCallback([&stage2, &millis2, &progress2](ProgressReporter::Stage stage, long millis, float progress) 
+            test.addCallback([&callback2CallCount](ProgressReporter::Stage stage, long millis, float progress) 
             {
-                stage2 = stage;
-                millis2 = millis;
-                progress2 = progress;
+                ++callback2CallCount;
             });
 
             test.testCallbacks();
+            test.testCallbacks();
 
-            THEN("All callbacks are called with the right values")
+            THEN("All callbacks are called twice")
             {
-                REQUIRE(stage1 == Test::Stage::WORKING);
-                REQUIRE(millis1 == 1000);
-                REQUIRE(std::abs(progress1 - 0.6f) < 0.001f);
-
-                REQUIRE(stage2 == Test::Stage::WORKING);
-                REQUIRE(millis2 == 1000);
-                REQUIRE(std::abs(progress2 - 0.6f) < 0.001f);
+                REQUIRE(callback1CallCount == 2);
+                REQUIRE(callback2CallCount == 2);
             }
         }
     }
