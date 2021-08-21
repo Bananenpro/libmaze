@@ -22,7 +22,7 @@ class IExporter : public ProgressReporter
 public:
     virtual ~IExporter() {}
 
-    virtual void save(const Maze& maze, std::string_view path) const = 0;
+    virtual void save(const Maze& maze, const std::string& path) = 0;
 };
 
 #endif /* EXPORTER_H */

@@ -11,7 +11,6 @@ A simple and extensible C++ library for creating and solving mazes.
     - [x] Exporter interface
     - [ ] PNGExporter
         - Creates png image file showing the maze
-        - Configurable colors?
     - [ ] MinecraftExporter
         - Creates datapack which generates the maze in-game
     - [ ] JSONExporter
@@ -44,11 +43,12 @@ A simple and extensible C++ library for creating and solving mazes.
 ### Installing Dependencies
 #### ArchLinux
 ```
-sudo pacman -S catch2
+sudo pacman -S catch2 libpng
 ```
 #### Other
 Install the following libraries:
 - [Catch2](https://github.com/catchorg/Catch2/tree/v2.x)
+- [libpng](http://www.libpng.org/pub/png/libpng.html)
 
 ### Building
 #### Unix-like

@@ -120,7 +120,7 @@ public:
 
     // ********** Other **********
     
-    void save(const IExporter& exporter, std::string_view path) const;
+    void save(IExporter& exporter, const std::string& path) const;
 
 private:
     std::size_t getIndexOf(std::size_t pos, GridType gridType) const;

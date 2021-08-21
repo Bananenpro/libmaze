@@ -174,7 +174,7 @@ void Maze::setWallOfCell(const Point& point, Direction direction, bool value)
 
 // ********** Other **********
 
-void Maze::save(const IExporter& exporter, std::string_view path) const
+void Maze::save(IExporter& exporter, const std::string& path) const
 {
     exporter.save(*this, path);
 }
