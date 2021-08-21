@@ -22,6 +22,13 @@ Maze maze(100, 150);
 ```
 
 
+Additionally you can supply an entrance and an exit position (x value in cell grid / entrance always on top, exit always on bottom):
+```c++
+// Maze(std::size_t width, std::size_t height, std::size_t entrancePos, std::size_t exitPos);
+Maze maze(100, 150, 50, 70);
+```
+
+
 ### Pos vs Point
 A value in the maze can be accessed either by supplying a point or a position.
 - A point consists of an x and a y value which count from left to right/top to bottom and start at 0\

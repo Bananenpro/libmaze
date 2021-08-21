@@ -19,19 +19,32 @@
 // ********** Constructors/Destructor **********
 
 Maze::Maze(std::size_t width, std::size_t height) 
-    : mData{}, mGridWidth{2 * width + 1}, mGridHeight{2 * height + 1}
+    : mData{}, mGridWidth{width == 0 ? 0 : 2 * width + 1}, mGridHeight{height == 0 ? 0 : 2 * height + 1},
+    mEntrancePos(0), mExitPos(width - 1)
 {
-    if (width == 0)
-        mGridWidth = 0;
+    init();
+}
 
-    if (height == 0)
-        mGridHeight = 0;
-
-    mData.resize(size(GridType::ALL));
+Maze::Maze(std::size_t width, std::size_t height, std::size_t entrancePos, std::size_t exitPos) 
+    : mData{}, mGridWidth{width == 0 ? 0 : 2 * width + 1}, mGridHeight{height == 0 ? 0 : 2 * height + 1},
+    mEntrancePos(entrancePos), mExitPos(exitPos)
+{
+    init();
 }
 
 Maze::~Maze()
 {}
+
+void Maze::init()
+{
+    mData.resize(size(GridType::ALL));
+
+    if (size(GridType::ALL) > 0)
+    {
+        set({mEntrancePos * 2 + 1, 0}, GridType::ALL, true);
+        set({mExitPos * 2 + 1, (*this).height(GridType::ALL) - 1}, GridType::ALL, true);
+    }
+}
 
 
 // ********** Converters **********
@@ -210,17 +223,31 @@ std::size_t Maze::getIndexOfWallOfCell(std::size_t pos, Direction direction) con
 std::size_t Maze::getIndexOfWallOfCell(const Point& point, Direction direction) const
 {
     Point totalPoint {convertPoint(point, GridType::ALL)};
+
+    Point wallPoint{};
+
     switch (direction)
     {
         case Direction::UP:
-            return getIndexOf({totalPoint.x, totalPoint.y - 1}, GridType::ALL);
+            wallPoint = {totalPoint.x, totalPoint.y - 1};
+            break;
         case Direction::RIGHT:
-            return getIndexOf({totalPoint.x + 1, totalPoint.y}, GridType::ALL);
+            wallPoint = {totalPoint.x + 1, totalPoint.y};
+            break;
         case Direction::DOWN:
-            return getIndexOf({totalPoint.x, totalPoint.y + 1}, GridType::ALL);
+            wallPoint = {totalPoint.x, totalPoint.y + 1};
+            break;
         case Direction::LEFT:
-            return getIndexOf({totalPoint.x - 1, totalPoint.y}, GridType::ALL);
+            wallPoint = {totalPoint.x - 1, totalPoint.y};
+            break;
         default:
             throw std::invalid_argument("Unknown direction");
     }
+
+    if (wallPoint.x == 0 || wallPoint.y == 0 || wallPoint.x == width(GridType::ALL) - 1 || wallPoint.y == height(GridType::ALL) - 1)
+    {
+        throw std::runtime_error("Cannot access border wall");
+    }
+
+    return getIndexOf(wallPoint, GridType::ALL);
 }

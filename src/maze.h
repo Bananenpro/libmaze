@@ -39,10 +39,16 @@ private:
     std::vector<bool> mData;
 
     // number of walls + cells in x direction
-    std::size_t mGridWidth;
+    const std::size_t mGridWidth;
 
     // number of walls + cells in y direction
-    std::size_t mGridHeight;
+    const std::size_t mGridHeight;
+
+    // x value of entrance in cell grid
+    const std::size_t mEntrancePos;
+
+    // x value of exit in cell grid
+    const std::size_t mExitPos;
 
 public:
 
@@ -53,7 +59,17 @@ public:
      * @param height number of cells in y direction
      */
     Maze(std::size_t width, std::size_t height);
+    /**
+     * @param width number of cells in x direction
+     * @param height number of cells in y direction
+     * @param entrancePos x value of entrance in cell grid
+     * @param exitPos x value of exit in cell grid
+     */
+    Maze(std::size_t width, std::size_t height, std::size_t entrancePos, std::size_t exitPos);
     ~Maze();
+private:
+    void init();
+public:
 
 
     // ********** Converters **********

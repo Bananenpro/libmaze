@@ -30,19 +30,20 @@ SCENARIO("Creating maze", "[maze]")
             REQUIRE(maze.size(GridType::ALL) == 651);
         }
 
-        THEN("All cells and walls are off")
+        THEN("All cells and walls except the entrance and exit are off")
         {
-            bool all_off = true;
+            std::size_t onCount{0};
 
             for (std::size_t i = 0; i < maze.size(GridType::ALL); ++i)
             {
                 if(maze.get(i, GridType::ALL))
                 {
-                    all_off = false;
+                    ++onCount;
                 }
             }
 
-            REQUIRE(all_off);
+            // one entrance and one exit
+            REQUIRE(onCount == 2);
         }
     }
 
@@ -401,13 +402,25 @@ SCENARIO("Changing maze data", "[maze]")
             REQUIRE(!maze.getWallOfCell({0, 0}, Direction::DOWN));
             REQUIRE(!maze.get(15, GridType::ALL));
 
-            REQUIRE(!maze.getWallOfCell(0, Direction::LEFT));
-            maze.setWallOfCell({0, 0}, Direction::LEFT, true);
-            REQUIRE(maze.getWallOfCell(0, Direction::LEFT));
+            bool wall1Exception{};
+            try
+            {
+                maze.setWallOfCell({0, 0}, Direction::LEFT, true);
+            } catch(const std::runtime_error&)
+            {
+                wall1Exception = true;
+            }
+            REQUIRE(wall1Exception);
 
-            REQUIRE(!maze.getWallOfCell(5, Direction::RIGHT));
-            maze.setWallOfCell({2, 1}, Direction::RIGHT, true);
-            REQUIRE(maze.getWallOfCell(5, Direction::RIGHT));
+            bool wall2Exception{};
+            try
+            {
+                maze.setWallOfCell(5, Direction::RIGHT, true);
+            } catch(const std::runtime_error&)
+            {
+                wall2Exception = true;
+            }
+            REQUIRE(wall2Exception);
         }
 
         WHEN("Changing out of range cells by cell grid point")
