@@ -19,10 +19,10 @@ SCENARIO("Exporting maze")
         for (std::size_t i{0}; i < maze.size(GridType::CELLS); ++i)
         {
             maze.set(i, GridType::CELLS, true);
-            maze.setWallOfCell(i, Direction::TOP, true);
+            maze.setWallOfCell(i, Direction::UP, true);
             maze.setWallOfCell(i, Direction::RIGHT, true);
             maze.setWallOfCell(i, Direction::LEFT, true);
-            maze.setWallOfCell(i, Direction::BOTTOM, true);
+            maze.setWallOfCell(i, Direction::DOWN, true);
         }
 
         PNGExporter exporter;

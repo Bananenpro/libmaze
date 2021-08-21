@@ -392,13 +392,13 @@ SCENARIO("Changing maze data", "[maze]")
             REQUIRE(!maze.getWallOfCell({0, 0}, Direction::RIGHT));
             REQUIRE(!maze.get(9, GridType::ALL));
 
-            REQUIRE(!maze.getWallOfCell({0, 0}, Direction::BOTTOM));
-            maze.setWallOfCell({0, 0}, Direction::BOTTOM, true);
-            REQUIRE(maze.getWallOfCell({0, 0}, Direction::BOTTOM));
-            REQUIRE(maze.getWallOfCell({0, 1}, Direction::TOP));
+            REQUIRE(!maze.getWallOfCell({0, 0}, Direction::DOWN));
+            maze.setWallOfCell({0, 0}, Direction::DOWN, true);
+            REQUIRE(maze.getWallOfCell({0, 0}, Direction::DOWN));
+            REQUIRE(maze.getWallOfCell({0, 1}, Direction::UP));
             REQUIRE(maze.get(15, GridType::ALL));
-            maze.setWallOfCell({0, 1}, Direction::TOP, false);
-            REQUIRE(!maze.getWallOfCell({0, 0}, Direction::BOTTOM));
+            maze.setWallOfCell({0, 1}, Direction::UP, false);
+            REQUIRE(!maze.getWallOfCell({0, 0}, Direction::DOWN));
             REQUIRE(!maze.get(15, GridType::ALL));
 
             REQUIRE(!maze.getWallOfCell(0, Direction::LEFT));

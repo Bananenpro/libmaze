@@ -212,11 +212,11 @@ std::size_t Maze::getIndexOfWallOfCell(const Point& point, Direction direction) 
     Point totalPoint {convertPoint(point, GridType::ALL)};
     switch (direction)
     {
-        case Direction::TOP:
+        case Direction::UP:
             return getIndexOf({totalPoint.x, totalPoint.y - 1}, GridType::ALL);
         case Direction::RIGHT:
             return getIndexOf({totalPoint.x + 1, totalPoint.y}, GridType::ALL);
-        case Direction::BOTTOM:
+        case Direction::DOWN:
             return getIndexOf({totalPoint.x, totalPoint.y + 1}, GridType::ALL);
         case Direction::LEFT:
             return getIndexOf({totalPoint.x - 1, totalPoint.y}, GridType::ALL);

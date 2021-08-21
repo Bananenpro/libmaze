@@ -29,7 +29,7 @@ enum class GridType
 
 enum class Direction
 {
-    TOP, RIGHT, BOTTOM, LEFT
+    UP, RIGHT, DOWN, LEFT
 };
 
 class Maze final
