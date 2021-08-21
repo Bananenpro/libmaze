@@ -9,7 +9,7 @@ A simple and extensible C++ library for creating and solving mazes.
 - [x] Work with mazes through an easy to use class
 - [ ] Export mazes
     - [x] Exporter interface
-    - [ ] PNGExporter
+    - [x] PNGExporter
         - Creates png image file showing the maze
     - [ ] MinecraftExporter
         - Creates datapack which generates the maze in-game
