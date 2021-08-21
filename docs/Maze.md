@@ -70,6 +70,9 @@ provides a few convenience functions for that:
 - `bool getWallOfCell(const Point& point, Direction direction) const`
 - `void setWallOfCell(const Point& point, Direction direction, bool value)`
 
+**WARNING:** Trying to access walls that are part of the border (e.g. trying to access the top wall of a cell with y=0)
+will result in a `std::runtime_error` exception being thrown.
+
 
 ### Saving
 Mazes can be saved by passing an implementation of the [Exporter interface](exporters/Exporter.md)
