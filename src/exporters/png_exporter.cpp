@@ -53,6 +53,8 @@ void PNGExporter::save(const Maze &maze, const std::string& path)
         }
         delete[] rows;
 
+        png_destroy_write_struct(&png, &info);
+
         throw;
     }
 }
@@ -128,6 +130,8 @@ void PNGExporter::write(png_structp png, png_infop pngInfo, png_bytepp rows, con
     png_init_io(png, fp);
     png_set_rows(png, pngInfo, rows);
     png_write_png(png, pngInfo, PNG_TRANSFORM_IDENTITY, nullptr);
+
+    png_write_end(png, nullptr)
 
     fclose(fp);
 }
