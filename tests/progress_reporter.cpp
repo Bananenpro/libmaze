@@ -17,9 +17,14 @@ SCENARIO("Registering and calling callbacks")
         class Test : public ProgressReporter
         {
         public:
+            enum Stage
+            {
+                STAGE_WORKING
+            };
+
             void testCallbacks()
             {
-                setStage(Stage::WORKING);
+                setStage(STAGE_WORKING);
                 updateProgress(0.6f);
             }
         };
@@ -38,20 +43,22 @@ SCENARIO("Registering and calling callbacks")
             int callback1CallCount {0};
             int callback2CallCount {0};
 
-            test.addCallback([&callback1CallCount](ProgressReporter::Stage stage, long millis, float progress) 
+            test.addCallback([&callback1CallCount](int stage, long millis, float progress) 
             {
-                ++callback1CallCount;
+                if (stage == Test::STAGE_WORKING)
+                    ++callback1CallCount;
             });
 
-            test.addCallback([&callback2CallCount](ProgressReporter::Stage stage, long millis, float progress) 
+            test.addCallback([&callback2CallCount](int stage, long millis, float progress) 
             {
-                ++callback2CallCount;
+                if (stage == Test::STAGE_WORKING)
+                    ++callback2CallCount;
             });
 
             test.testCallbacks();
             test.testCallbacks();
 
-            THEN("All callbacks are called twice")
+            THEN("All callbacks are called once")
             {
                 REQUIRE(callback1CallCount == 2);
                 REQUIRE(callback2CallCount == 2);

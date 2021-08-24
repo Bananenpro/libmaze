@@ -43,7 +43,7 @@ void PNGExporter::save(const Maze &maze, const std::string& path)
         rows = generatePixelData(maze);
         write(png, info, rows, path);
 
-        setStage(Stage::FINISHED);
+        setStage(STAGE_FINISHED);
     }
     catch (const std::exception&)
     {
@@ -80,7 +80,7 @@ void PNGExporter::setCompression(Compression compression)
 
 png_bytepp PNGExporter::generatePixelData(const Maze &maze)
 {
-    setStage(Stage::PREPARING);
+    setStage(STAGE_PREPARING);
 
     std::size_t calculatedPixels {0};
 
@@ -107,7 +107,7 @@ png_bytepp PNGExporter::generatePixelData(const Maze &maze)
 
 void PNGExporter::write(png_structp png, png_infop pngInfo, png_bytepp rows, const std::string& path)
 {
-    setStage(Stage::WORKING);
+    setStage(STAGE_WRITING);
 
     FILE *fp {fopen(path.c_str(), "wb")};
 

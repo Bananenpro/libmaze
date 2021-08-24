@@ -5,6 +5,9 @@ See [#Loading](../Maze.md#loading) in the maze class docs
 
 ### Callbacks
 ILoader inherits its callback capabilities from [ProgressReporter](../ProgressReporter.md).
+In addition to that ILoader provides the following stages:
+- STAGE_READING
+- STAGE_CONSTRUCTING
 
 ### Implementations
 - [PNGLoader](PNGLoader.md)

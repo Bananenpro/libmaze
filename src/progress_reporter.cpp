@@ -32,7 +32,7 @@ std::size_t ProgressReporter::callbackCount() const
     return mCallbacks.size();
 }
 
-ProgressReporter::Stage ProgressReporter::stage() const
+int ProgressReporter::stage() const
 {
     return mStage;
 }
@@ -61,12 +61,12 @@ void ProgressReporter::clearCallbacks()
     mCallbacks.shrink_to_fit();
 }
 
-void ProgressReporter::setStage(Stage stage)
+void ProgressReporter::setStage(int stage)
 {
     if (stage != mStage)
     {
         mStage = stage;
-        mProgress = mStage == Stage::FINISHED ? 1 : 0;
+        mProgress = mStage == STAGE_FINISHED ? 1 : 0;
         mStartTime = currentTimeMillis();
         callCallbacks();
     }
@@ -85,12 +85,15 @@ void ProgressReporter::updateProgress(float progress)
 
 void ProgressReporter::callCallbacks()
 {
-    for (callback_t cb : mCallbacks)
+    if (stage() != STAGE_NONE)
     {
-        cb(stage(), currentTimeMillis() - mStartTime, mProgress);
-    }
+        for (callback_t cb : mCallbacks)
+        {
+            cb(stage(), currentTimeMillis() - mStartTime, mProgress);
+        }
 
-    mLastCallback = currentTimeMillis();
+        mLastCallback = currentTimeMillis();
+    }
 }
 
 long ProgressReporter::currentTimeMillis() const

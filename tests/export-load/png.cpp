@@ -41,22 +41,22 @@ SCENARIO("Exporting/loading maze as png")
         WHEN("Exporting the maze")
         {
             float exportPreparingProgress{};
-            float exportWorkingProgress{};
+            float exportWritingProgress{};
             bool exportFinished{};
 
-            exporter.addCallback([&exportPreparingProgress, &exportWorkingProgress, &exportFinished](PNGExporter::Stage stage, long millis, float progress)
+            exporter.addCallback([&exportPreparingProgress, &exportWritingProgress, &exportFinished](int stage, long millis, float progress)
             {
                 REQUIRE(!(progress < 0 || progress > 1));
 
                 switch(stage)
                 {
-                case PNGExporter::Stage::PREPARING:
+                case PNGExporter::STAGE_PREPARING:
                     exportPreparingProgress = progress;
                     break;
-                case PNGExporter::Stage::WORKING:
-                    exportWorkingProgress = progress;
+                case PNGExporter::STAGE_WRITING:
+                    exportWritingProgress = progress;
                     break;
-                case PNGExporter::Stage::FINISHED:
+                case PNGExporter::STAGE_FINISHED:
                     exportFinished = true;
                     break;
                 default:
@@ -69,7 +69,7 @@ SCENARIO("Exporting/loading maze as png")
             THEN("All progress callbacks are working")
             {
                 REQUIRE(exportPreparingProgress == 1);
-                REQUIRE(exportWorkingProgress == 1);
+                REQUIRE(exportWritingProgress == 1);
                 REQUIRE(exportFinished);
             }
 
@@ -78,23 +78,23 @@ SCENARIO("Exporting/loading maze as png")
                 PNGLoader loader;
                 WHEN("Loading the maze")
                 {
-                    float loadPreparingProgress{};
+                    float loadReadingProgress{};
                     float loadWorkingProgress{};
                     bool loadFinished{};
 
-                    loader.addCallback([&loadPreparingProgress, &loadWorkingProgress, &loadFinished](PNGLoader::Stage stage, long millis, float progress)
+                    loader.addCallback([&loadReadingProgress, &loadWorkingProgress, &loadFinished](int stage, long millis, float progress)
                     {
                         REQUIRE(!((progress < 0 && progress != -1) || progress > 1));
 
                         switch(stage)
                         {
-                        case PNGLoader::Stage::PREPARING:
-                            loadPreparingProgress = progress;
+                        case PNGLoader::STAGE_READING:
+                            loadReadingProgress = progress;
                             break;
-                        case PNGLoader::Stage::WORKING:
+                        case PNGLoader::STAGE_CONSTRUCTING:
                             loadWorkingProgress = progress;
                             break;
-                        case PNGLoader::Stage::FINISHED:
+                        case PNGLoader::STAGE_FINISHED:
                             loadFinished = true;
                             break;
                         default:
@@ -106,7 +106,7 @@ SCENARIO("Exporting/loading maze as png")
 
                     THEN("All progress callbacks are working")
                     {
-                        REQUIRE(loadPreparingProgress == 1);
+                        REQUIRE(loadReadingProgress == 1);
                         REQUIRE(loadWorkingProgress == 1);
                         REQUIRE(loadFinished);
                     }

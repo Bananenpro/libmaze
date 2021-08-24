@@ -5,6 +5,9 @@ See [#Saving](../Maze.md#saving) in the maze class docs
 
 ### Callbacks
 IExporter inherits its callback capabilities from [ProgressReporter](../ProgressReporter.md).
+In addition to that IExporter provides the following stages:
+- STAGE_PREPARING
+- STAGE_WRITING
 
 ### Implementations
 - [PNGExporter](PNGExporter.md)

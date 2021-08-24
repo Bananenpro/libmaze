@@ -17,6 +17,11 @@
 class PNGLoader : public ILoader
 {
 public:
+    enum Stage
+    {
+        STAGE_READING, STAGE_CONSTRUCTING
+    };
+
     Maze load(const std::string& path) override;
 
 private:

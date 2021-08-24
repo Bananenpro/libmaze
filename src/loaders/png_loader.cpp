@@ -30,7 +30,7 @@ Maze PNGLoader::load(const std::string& path)
 
     png_destroy_read_struct(&png, &info, nullptr);
 
-    setStage(Stage::FINISHED);
+    setStage(STAGE_FINISHED);
 
     return maze;
 }
@@ -40,7 +40,7 @@ Maze PNGLoader::load(const std::string& path)
 
 Maze PNGLoader::constructMaze(png_bytepp rows, std::size_t width, std::size_t height)
 {
-    setStage(Stage::WORKING);
+    setStage(STAGE_CONSTRUCTING);
 
     Maze maze((width - 1) / 2, (height - 1) / 2);
 
@@ -92,7 +92,7 @@ Maze PNGLoader::constructMaze(png_bytepp rows, std::size_t width, std::size_t he
 
 png_bytepp PNGLoader::readFile(png_structp png, png_infop pngInfo, const std::string& path)
 {
-    setStage(Stage::PREPARING);
+    setStage(STAGE_READING);
     updateProgress(-1);
 
     png_byte header[8];
