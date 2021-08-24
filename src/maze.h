@@ -12,6 +12,7 @@
 #include <vector>
 
 #include "exporters/exporter.h"
+#include "loaders/loader.h"
 
 
 // ********** Structs/Enums **********
@@ -45,10 +46,10 @@ private:
     const std::size_t mGridHeight;
 
     // x value of entrance in cell grid
-    const std::size_t mEntrancePos;
+    std::size_t mEntrancePos;
 
     // x value of exit in cell grid
-    const std::size_t mExitPos;
+    std::size_t mExitPos;
 
 public:
 
@@ -109,6 +110,16 @@ public:
     std::size_t height(GridType gridType) const;
     std::size_t size(GridType gridType) const;
 
+    /**
+     * @return x value of entrance in cell grid
+     */
+    std::size_t entrancePos(GridType gridType) const;
+
+    /**
+     * @return x value of exit in cell grid
+     */
+    std::size_t exitPos(GridType gridType) const;
+
     
     // ********** Setters **********
 
@@ -133,10 +144,21 @@ public:
      * @param value true for open wall
      */
     void setWallOfCell(const Point& point, Direction direction, bool value);
+    
+    /**
+     * @param pos x value of entrance
+     */
+    void setEntrancePos(std::size_t pos, GridType gridType);
+
+    /**
+     * @param pos x value of exit
+     */
+    void setExitPos(std::size_t pos, GridType gridType);
 
     // ********** Other **********
     
     void save(IExporter& exporter, const std::string& path) const;
+    static Maze load(ILoader& loader, const std::string& path);
 
 private:
     std::size_t getIndexOf(std::size_t pos, GridType gridType) const;

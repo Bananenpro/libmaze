@@ -2,8 +2,11 @@
 
 ### Table of Contents
 - [Maze class](Maze.md)
-- [IExporter interface](exporters/Exporter.md)
-    - [PNGExporter class](exporters/PNGExporter.md)
+- Exporting/Loading
+    - [IExporter interface](exporters/Exporter.md)
+        - [PNGExporter class](exporters/PNGExporter.md)
+    - [ILoader interface](loaders/Loader.md)
+        - [PNGLoader class](loaders/PNGLoader.md)
 - [ProgressReporter class](ProgressReporter.md)
 
 ---

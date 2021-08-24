@@ -74,7 +74,7 @@ void ProgressReporter::setStage(Stage stage)
 
 void ProgressReporter::updateProgress(float progress)
 {
-    if ((progress == 1 && mProgress < 1) || progress - mProgress >= mCallbackPrecision || currentTimeMillis() - mLastCallback > mMaxCallbackInterval)
+    if ((progress < 0 && mProgress >= 0) || (progress == 1 && mProgress < 1) || progress - mProgress >= mCallbackPrecision || currentTimeMillis() - mLastCallback > mMaxCallbackInterval)
     {
         mProgress = progress;
         callCallbacks();

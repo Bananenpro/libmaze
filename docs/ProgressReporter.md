@@ -15,7 +15,7 @@ All registered callbacks are called once one of the following conditions is met:
 Three arguments are passed to the callback functions:
 - The current stage (This can either be `Stage::PREPARING`, `Stage::WORKING` or `Stage::FINISHED`)
 - The time in milliseconds since the start of the current stage
-- The progress of the current stage between 0 (Nothing done yet) and 1 (Finished)
+- The progress of the current stage between 0 (nothing done yet) and 1 (finished) or -1 (undeterminable)
 
 ---
 [Go to home](Home.md)\

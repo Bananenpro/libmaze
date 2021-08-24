@@ -77,7 +77,13 @@ will result in a `std::runtime_error` exception being thrown.
 ### Saving
 Mazes can be saved by passing an implementation of the [IExporter interface](exporters/Exporter.md)
 and the desired file path to the\
-`void save(IExporter& exporter, std::string_view path) const`\
+`void save(IExporter& exporter, const std::string& path) const`\
+member function.
+
+### Loading
+Mazes can be loaded by passing an implementation of the [ILoader interface](loaders/Loader.md)
+and the desired file path to the static\
+`static Maze load(ILoader& loader, const std::string& path)`\
 member function.
 
 ---

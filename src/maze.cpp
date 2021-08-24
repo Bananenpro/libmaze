@@ -161,6 +161,15 @@ std::size_t Maze::size(GridType gridType) const
     return width(gridType) * height(gridType);
 }
 
+std::size_t Maze::entrancePos(GridType gridType) const
+{
+    return mEntrancePos;
+}
+
+std::size_t Maze::exitPos(GridType gridType) const
+{
+    return mExitPos;
+}
 
 // ********** Setters **********
 
@@ -184,6 +193,36 @@ void Maze::setWallOfCell(const Point& point, Direction direction, bool value)
     mData.at(getIndexOfWallOfCell(point, direction)) = value;
 }
 
+void Maze::setEntrancePos(std::size_t pos, GridType gridType)
+{
+    if (gridType == GridType::ALL)
+        mEntrancePos = (pos - 1) / 2;
+    else
+        mEntrancePos = pos;
+
+    for (std::size_t x{0}; x < width(GridType::ALL); ++x)
+    {
+        set({x, 0}, GridType::ALL, false);
+    }
+
+    set({mEntrancePos * 2 + 1, 0}, GridType::ALL, true);
+}
+
+void Maze::setExitPos(std::size_t pos, GridType gridType)
+{
+    if (gridType == GridType::ALL)
+        mExitPos = (pos - 1) / 2;
+    else
+        mExitPos = pos;
+
+    for (std::size_t x{0}; x < width(GridType::ALL); ++x)
+    {
+        set({x, height(GridType::ALL) - 1}, GridType::ALL, false);
+    }
+
+    set({mExitPos * 2 + 1, height(GridType::ALL) - 1}, GridType::ALL, true);
+}
+
 
 // ********** Other **********
 
@@ -191,6 +230,12 @@ void Maze::save(IExporter& exporter, const std::string& path) const
 {
     exporter.save(*this, path);
 }
+
+Maze Maze::load(ILoader& loader, const std::string& path)
+{
+    return loader.load(path);
+}
+
 
 // ==================== PRIVATE ====================
 
