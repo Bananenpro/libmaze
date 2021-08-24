@@ -17,44 +17,51 @@
 
 void PNGExporter::save(const Maze &maze, const std::string& path)
 {
-    png_structp png {nullptr};
-    png_infop info {nullptr};
-
-
-    png = png_create_write_struct(PNG_LIBPNG_VER_STRING, nullptr, nullptr, nullptr);
-    if (!png)
-    {
-        throw std::runtime_error("Couldn't create png struct");
-    }
-
-    info = png_create_info_struct(png);
-    if (!info)
-    {
-        throw std::runtime_error("Couldn't create png info struct");
-    }
-
-    png_set_compression_level(png, static_cast<int>(mCompression));
-    png_set_IHDR(png, info, maze.width(GridType::ALL), maze.height(GridType::ALL), 8, PNG_COLOR_TYPE_GRAY, PNG_INTERLACE_NONE, PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
-
-    png_bytepp rows {nullptr};
-
     try
     {
-        rows = generatePixelData(maze);
-        write(png, info, rows, path);
+        png_structp png {nullptr};
+        png_infop info {nullptr};
 
-        setStage(STAGE_FINISHED);
-    }
-    catch (const std::exception&)
-    {
-        for(std::size_t y{0}; y < maze.height(GridType::ALL); ++y)
+
+        png = png_create_write_struct(PNG_LIBPNG_VER_STRING, nullptr, nullptr, nullptr);
+        if (!png)
         {
-            delete[] rows[y];
+            throw std::runtime_error("Couldn't create png struct");
         }
-        delete[] rows;
 
-        png_destroy_write_struct(&png, &info);
+        info = png_create_info_struct(png);
+        if (!info)
+        {
+            throw std::runtime_error("Couldn't create png info struct");
+        }
 
+        png_set_compression_level(png, static_cast<int>(mCompression));
+        png_set_IHDR(png, info, maze.width(GridType::ALL), maze.height(GridType::ALL), 8, PNG_COLOR_TYPE_GRAY, PNG_INTERLACE_NONE, PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
+
+        png_bytepp rows {nullptr};
+
+        try
+        {
+            rows = generatePixelData(maze);
+            write(png, info, rows, path);
+
+            setStage(STAGE_FINISHED);
+        }
+        catch (const std::exception&)
+        {
+            for(std::size_t y{0}; y < maze.height(GridType::ALL); ++y)
+            {
+                delete[] rows[y];
+            }
+            delete[] rows;
+
+            png_destroy_write_struct(&png, &info);
+
+            throw;
+        }
+    } catch (const std::exception&)
+    {
+        setStage(STAGE_FAILURE);
         throw;
     }
 }

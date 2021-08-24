@@ -17,22 +17,29 @@
 
 Maze PNGLoader::load(const std::string& path)
 {
-    png_structp png {png_create_read_struct(PNG_LIBPNG_VER_STRING, nullptr, nullptr, nullptr)};
-    if (!png)
-        throw std::runtime_error("Couldn't create png struct");
+    try
+    {
+        png_structp png {png_create_read_struct(PNG_LIBPNG_VER_STRING, nullptr, nullptr, nullptr)};
+        if (!png)
+            throw std::runtime_error("Couldn't create png struct");
 
-    png_infop info {png_create_info_struct(png)};
-    if (!info)
-        throw std::runtime_error("Couldn't create png info struct");
+        png_infop info {png_create_info_struct(png)};
+        if (!info)
+            throw std::runtime_error("Couldn't create png info struct");
 
-    png_bytepp rows {readFile(png, info, path)};
-    Maze maze {constructMaze(rows, png_get_image_width(png, info), png_get_image_height(png, info))};
+        png_bytepp rows {readFile(png, info, path)};
+        Maze maze {constructMaze(rows, png_get_image_width(png, info), png_get_image_height(png, info))};
 
-    png_destroy_read_struct(&png, &info, nullptr);
+        png_destroy_read_struct(&png, &info, nullptr);
 
-    setStage(STAGE_FINISHED);
+        setStage(STAGE_FINISHED);
 
-    return maze;
+        return maze;
+    } catch (const std::exception&)
+    {
+        setStage(STAGE_FAILURE);
+        throw;
+    }
 }
 
 

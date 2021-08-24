@@ -66,7 +66,12 @@ void ProgressReporter::setStage(int stage)
     if (stage != mStage)
     {
         mStage = stage;
-        mProgress = mStage == STAGE_FINISHED ? 1 : 0;
+        if (mStage == STAGE_FINISHED)
+            mProgress = 1;
+        else if (mStage == STAGE_FAILURE)
+            mProgress = -1;
+        else
+            mProgress = 0;
         mStartTime = currentTimeMillis();
         callCallbacks();
     }
