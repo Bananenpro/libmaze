@@ -17,11 +17,6 @@
 class PNGExporter : public IExporter
 {
 public:
-    enum Stage
-    {
-        STAGE_PREPARING, STAGE_WRITING
-    };
-
     enum Compression
     {
         OFF, VERY_LOW, LOW, MEDIUM_LOW, MEDIUM, MEDIUM_HIGH, HIGH, VERY_HIGH, EXTREME, FULL

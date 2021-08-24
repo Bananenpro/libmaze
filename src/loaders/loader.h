@@ -20,6 +20,12 @@ class Maze;
 class ILoader : public ProgressReporter
 {
 public:
+    enum Stage
+    {
+        STAGE_READING, STAGE_CONSTRUCTING
+    };
+
+public:
     virtual ~ILoader() {}
 
     virtual Maze load(const std::string& path) = 0;

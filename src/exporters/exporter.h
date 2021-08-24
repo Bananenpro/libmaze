@@ -20,6 +20,12 @@ class Maze;
 class IExporter : public ProgressReporter
 {
 public:
+    enum Stage
+    {
+        STAGE_PREPARING, STAGE_WRITING
+    };
+
+public:
     virtual ~IExporter() {}
 
     virtual void save(const Maze& maze, const std::string& path) = 0;
