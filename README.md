@@ -7,7 +7,7 @@ A simple and extensible C++ library for creating and solving mazes.
 ### Features
 
 - [x] Work with mazes through an easy to use class
-- [ ] Export mazes
+- Export mazes
     - [x] Exporter interface
     - [x] PNGExporter
         - Creates png image file showing the maze
@@ -15,12 +15,12 @@ A simple and extensible C++ library for creating and solving mazes.
         - Creates datapack which generates the maze in-game
     - [ ] JSONExporter
         - Creates json file representing the maze
-- [ ] Load mazes
+- Load mazes
     - [x] Loader interface
     - [x] PNGLoader
         - Load png files created using `PNGExporter`
 - [ ] Create weighted graphs from mazes
-- [ ] Generate mazes
+- Generate mazes
     - [ ] Generator interface
     - [ ] [Randomized depth-first search](https://www.wikiwand.com/en/Maze_generation_algorithm#Randomized_depth-first_search)
     - [ ] [Wilson's algorithm](https://www.wikiwand.com/en/Maze_generation_algorithm#Wilson's_algorithm)
@@ -30,7 +30,7 @@ A simple and extensible C++ library for creating and solving mazes.
     - [ ] [Recursive division method](https://www.wikiwand.com/en/Maze_generation_algorithm#Recursive_division_method)
     - [ ] [Simple algorithms](https://www.wikiwand.com/en/Maze_generation_algorithm#Simple_algorithms)
     - [ ] [Cellular automata](https://www.wikiwand.com/en/Maze_generation_algorithm#Cellular_automaton_algorithms)
-- [ ] Solve mazes
+- Solve mazes
     - [ ] Solver interface
     - [ ] [Breadth-first search](https://www.wikiwand.com/en/Breadth-first_search)
     - [ ] [Dijkstra's algorithm](https://www.wikiwand.com/en/Dijkstra's_algorithm)
