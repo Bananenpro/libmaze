@@ -19,7 +19,7 @@ Three arguments are passed to the callback functions:
 
 ### Extending ProgressReporter
 To extend ProgressReporter you don't need to do anything except optionally providing a Stage enum for the extra stages your class provides.
-ProgressReporter already provides STAGE_NONE and STAGE_FINISHED
+ProgressReporter already provides STAGE_NONE, STAGE_FINISHED and STAGE_FAILURE.
 Example:
 ```c++
 enum Stage

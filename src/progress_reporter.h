@@ -18,7 +18,7 @@ class ProgressReporter
 public:
     enum Stage
     {
-        STAGE_NONE=-1, STAGE_FINISHED=100
+        STAGE_FAILURE=-2, STAGE_NONE=-1, STAGE_FINISHED=100
     };
 
     // void callback(Stage stage, long millis, float progress) <- progress: 0-100
