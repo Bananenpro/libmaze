@@ -1,5 +1,7 @@
 # libmaze documentation
 
+#### [Quick Start](QuickStart.md)
+
 ### Table of Contents
 - [Maze class](Maze.md)
 - [Utilities](Utils.md)
