@@ -1,6 +1,6 @@
 # libmaze
 
-A simple and extensible C++ library for creating and solving mazes.
+A simple and extensible C++20 library for creating and solving mazes.
 
 ### [Documentation](docs/Home.md)
 
