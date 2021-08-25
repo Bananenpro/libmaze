@@ -20,7 +20,7 @@ A simple and extensible C++ library for creating and solving mazes.
     - [x] PNGLoader
         - Load png files created using `PNGExporter`
     - [ ] JSONLoader
-        - Load png files created using `JSONExporter`
+        - Load json files created using `JSONExporter`
 - [ ] Create weighted graphs from mazes
 - Generate mazes
     - [x] Generator interface
