@@ -10,15 +10,17 @@ A simple and extensible C++ library for creating and solving mazes.
 - Export mazes
     - [x] Exporter interface
     - [x] PNGExporter
-        - Creates png image file showing the maze
+        - Create png image files showing the maze
     - [ ] MinecraftExporter
-        - Creates datapack which generates the maze in-game
+        - Create datapacks which generates the maze in-game
     - [ ] JSONExporter
-        - Creates json file representing the maze
+        - Create json files representing the maze
 - Load mazes
     - [x] Loader interface
     - [x] PNGLoader
         - Load png files created using `PNGExporter`
+    - [ ] JSONLoader
+        - Load png files created using `JSONExporter`
 - [ ] Create weighted graphs from mazes
 - Generate mazes
     - [x] Generator interface
