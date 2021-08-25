@@ -21,7 +21,6 @@ A simple and extensible C++ library for creating and solving mazes.
         - Load png files created using `PNGExporter`
     - [ ] JSONLoader
         - Load json files created using `JSONExporter`
-- [ ] Create weighted graphs from mazes
 - Generate mazes
     - [x] Generator interface
     - [x] [Randomized depth-first search](https://www.wikiwand.com/en/Maze_generation_algorithm#Randomized_depth-first_search)
@@ -32,6 +31,7 @@ A simple and extensible C++ library for creating and solving mazes.
     - [ ] [Recursive division method](https://www.wikiwand.com/en/Maze_generation_algorithm#Recursive_division_method)
     - [ ] [Simple algorithms](https://www.wikiwand.com/en/Maze_generation_algorithm#Simple_algorithms)
     - [ ] [Cellular automata](https://www.wikiwand.com/en/Maze_generation_algorithm#Cellular_automaton_algorithms)
+- [ ] Create weighted graphs from mazes
 - Solve mazes
     - [ ] Solver interface
     - [ ] [Breadth-first search](https://www.wikiwand.com/en/Breadth-first_search)
