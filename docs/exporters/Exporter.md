@@ -1,5 +1,7 @@
 # IExporter interface
 
+Header: [`exporters/exporter.h`](../../src/exporters/exporter.h)
+
 ### Saving a maze
 See [#Saving](../Maze.md#saving) in the maze class docs
 

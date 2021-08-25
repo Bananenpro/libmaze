@@ -1,5 +1,7 @@
 # PNGExporter class
 
+Header: [`exporters/png_exporter.h`](../../src/exporters/png_exporter.h)
+
 Implementation of [IExporter](Exporter.md) for saving mazes as *png* files.
 
 # Example usage

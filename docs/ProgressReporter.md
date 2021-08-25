@@ -1,5 +1,7 @@
 # ProgressReporter class 
 
+Header: [`progress_reporter.h`](../src/progress_reporter.h)
+
 ### Registering callback functions
 You can register callback functions with the signature `void callback(int stage, long millis, float progress)`
 using the `void addCallback(callback_t callback)`

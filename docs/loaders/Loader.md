@@ -1,5 +1,7 @@
 # ILoader interface
 
+Header: [`loaders/loader.h`](../../src/loaders/loader.h)
+
 ### Loading a maze
 See [#Loading](../Maze.md#loading) in the maze class docs
 
