@@ -2,6 +2,9 @@
 
 ### Table of Contents
 - [Maze class](Maze.md)
+- [Utilities](Utils.md)
+- [IGenerator interface](generators/Generator.md)
+    - [DepthFirstGenerator class](generators/DepthFirstGenerator.md)
 - Exporting/Loading
     - [IExporter interface](exporters/Exporter.md)
         - [PNGExporter class](exporters/PNGExporter.md)

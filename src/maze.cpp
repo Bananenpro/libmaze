@@ -223,6 +223,17 @@ void Maze::setExitPos(std::size_t pos, GridType gridType)
     set({mExitPos * 2 + 1, height(GridType::ALL) - 1}, GridType::ALL, true);
 }
 
+void Maze::clear()
+{
+    for (std::size_t i{}; i < size(GridType::ALL); ++i)
+    {
+        set(i, GridType::ALL, false);
+    }
+
+    setEntrancePos(mEntrancePos, GridType::CELLS);
+    setExitPos(mEntrancePos, GridType::CELLS);
+}
+
 
 // ********** Other **********
 
@@ -234,6 +245,11 @@ void Maze::save(IExporter& exporter, const std::string& path) const
 Maze Maze::load(ILoader& loader, const std::string& path)
 {
     return loader.load(path);
+}
+
+void Maze::generate(IGenerator& generator)
+{
+    generator.generate(*this);
 }
 
 

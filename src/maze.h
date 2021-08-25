@@ -13,6 +13,7 @@
 
 #include "exporters/exporter.h"
 #include "loaders/loader.h"
+#include "generators/generator.h"
 
 
 // ********** Structs/Enums **********
@@ -155,10 +156,16 @@ public:
      */
     void setExitPos(std::size_t pos, GridType gridType);
 
+    /**
+     * clears all cells and walls except the entrance and the exit
+     */
+    void clear();
+
     // ********** Other **********
     
     void save(IExporter& exporter, const std::string& path) const;
     static Maze load(ILoader& loader, const std::string& path);
+    void generate(IGenerator& generator);
 
 private:
     std::size_t getIndexOf(std::size_t pos, GridType gridType) const;

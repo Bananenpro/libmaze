@@ -21,8 +21,8 @@ A simple and extensible C++ library for creating and solving mazes.
         - Load png files created using `PNGExporter`
 - [ ] Create weighted graphs from mazes
 - Generate mazes
-    - [ ] Generator interface
-    - [ ] [Randomized depth-first search](https://www.wikiwand.com/en/Maze_generation_algorithm#Randomized_depth-first_search)
+    - [x] Generator interface
+    - [x] [Randomized depth-first search](https://www.wikiwand.com/en/Maze_generation_algorithm#Randomized_depth-first_search)
     - [ ] [Wilson's algorithm](https://www.wikiwand.com/en/Maze_generation_algorithm#Wilson's_algorithm)
     - [ ] [Aldous-Broder algorithm](https://www.wikiwand.com/en/Maze_generation_algorithm#Aldous-Broder_algorithm)
     - [ ] [Randomized Kruskal's algorithm](https://www.wikiwand.com/en/Maze_generation_algorithm#Randomized_Kruskal's_algorithm)
