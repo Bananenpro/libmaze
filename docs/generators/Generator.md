@@ -1,5 +1,7 @@
 # IGenerator interface
 
+Header: [`generators/generator.h`](../../src/generators/generator.h)
+
 ### Generating a maze
 See [#Generating](../Maze.md#generating) in the maze class docs
 
