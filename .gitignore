@@ -2,3 +2,5 @@ build/
 .ccls
 vgcore.*
 Session.vim
+compile-flags.txt
+.clang-format

@@ -10,8 +10,6 @@
 #include <random>
 
 // generate a random number between min (inclusive) and max (inclusive)
-template <typename T>
-T random(T min, T max);
+template <typename T> T random(T min, T max);
 
 #endif /* RANDOM_H */
-

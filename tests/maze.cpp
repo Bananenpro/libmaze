@@ -5,8 +5,8 @@
  * @license     : MIT
  */
 
-#include <exception>
 #include <catch2/catch.hpp>
+#include <exception>
 
 #include "../src/maze.h"
 
@@ -34,10 +34,8 @@ SCENARIO("Creating maze", "[maze]")
         {
             std::size_t onCount{0};
 
-            for (std::size_t i = 0; i < maze.size(GridType::ALL); ++i)
-            {
-                if(maze.get(i, GridType::ALL))
-                {
+            for (std::size_t i = 0; i < maze.size(GridType::ALL); ++i) {
+                if (maze.get(i, GridType::ALL)) {
                     ++onCount;
                 }
             }
@@ -75,8 +73,8 @@ SCENARIO("Converting pos <-> point", "[maze]")
 
         WHEN("Converting complete grid positions to complete grid points")
         {
-            Point point1 {maze.convertToPoint(0, GridType::ALL)};
-            Point point2 {maze.convertToPoint(17, GridType::ALL)};
+            Point point1{maze.convertToPoint(0, GridType::ALL)};
+            Point point2{maze.convertToPoint(17, GridType::ALL)};
 
             THEN("The created points point to the same locations")
             {
@@ -90,9 +88,8 @@ SCENARIO("Converting pos <-> point", "[maze]")
 
         WHEN("Converting complete grid points to complete grid positions")
         {
-            std::size_t pos1 {maze.convertToPos({0, 0}, GridType::ALL)};
-            std::size_t pos2 {maze.convertToPos({3, 2}, GridType::ALL)};
-
+            std::size_t pos1{maze.convertToPos({0, 0}, GridType::ALL)};
+            std::size_t pos2{maze.convertToPos({3, 2}, GridType::ALL)};
 
             THEN("The created points point to the same locations")
             {
@@ -103,9 +100,9 @@ SCENARIO("Converting pos <-> point", "[maze]")
 
         WHEN("Converting cell grid positions to cell grid points")
         {
-            Point point1 {maze.convertToPoint(0, GridType::CELLS)};
-            Point point2 {maze.convertToPoint(1, GridType::CELLS)};
-            Point point3 {maze.convertToPoint(5, GridType::CELLS)};
+            Point point1{maze.convertToPoint(0, GridType::CELLS)};
+            Point point2{maze.convertToPoint(1, GridType::CELLS)};
+            Point point3{maze.convertToPoint(5, GridType::CELLS)};
 
             THEN("The created points point to the same locations")
             {
@@ -122,10 +119,9 @@ SCENARIO("Converting pos <-> point", "[maze]")
 
         WHEN("Converting cell grid points to cell grid positions")
         {
-            std::size_t pos1 {maze.convertToPos({0, 0}, GridType::CELLS)};
-            std::size_t pos2 {maze.convertToPos({1, 0}, GridType::CELLS)};
-            std::size_t pos3 {maze.convertToPos({2, 1}, GridType::CELLS)};
-
+            std::size_t pos1{maze.convertToPos({0, 0}, GridType::CELLS)};
+            std::size_t pos2{maze.convertToPos({1, 0}, GridType::CELLS)};
+            std::size_t pos3{maze.convertToPos({2, 1}, GridType::CELLS)};
 
             THEN("The created points point to the same locations")
             {
@@ -145,9 +141,9 @@ SCENARIO("Converting cell grid <-> complete grid")
 
         WHEN("Converting cell grid positions to complete grid positions")
         {
-            std::size_t pos1 {maze.convertPos(0, GridType::ALL)};
-            std::size_t pos2 {maze.convertPos(2, GridType::ALL)};
-            std::size_t pos3 {maze.convertPos(5, GridType::ALL)};
+            std::size_t pos1{maze.convertPos(0, GridType::ALL)};
+            std::size_t pos2{maze.convertPos(2, GridType::ALL)};
+            std::size_t pos3{maze.convertPos(5, GridType::ALL)};
 
             THEN("The created positions point to the same locations")
             {
@@ -159,9 +155,9 @@ SCENARIO("Converting cell grid <-> complete grid")
 
         WHEN("Converting cell grid points to complete grid points")
         {
-            Point point1 {maze.convertPoint({0, 0}, GridType::ALL)};
-            Point point2 {maze.convertPoint({2, 0}, GridType::ALL)};
-            Point point3 {maze.convertPoint({2, 1}, GridType::ALL)};
+            Point point1{maze.convertPoint({0, 0}, GridType::ALL)};
+            Point point2{maze.convertPoint({2, 0}, GridType::ALL)};
+            Point point3{maze.convertPoint({2, 1}, GridType::ALL)};
 
             THEN("The created points point to the same locations")
             {
@@ -178,9 +174,9 @@ SCENARIO("Converting cell grid <-> complete grid")
 
         WHEN("Converting complete grid positions to valid cell grid positions")
         {
-            std::size_t pos1 {maze.convertPos(8, GridType::CELLS)};
-            std::size_t pos2 {maze.convertPos(12, GridType::CELLS)};
-            std::size_t pos3 {maze.convertPos(26, GridType::CELLS)};
+            std::size_t pos1{maze.convertPos(8, GridType::CELLS)};
+            std::size_t pos2{maze.convertPos(12, GridType::CELLS)};
+            std::size_t pos3{maze.convertPos(26, GridType::CELLS)};
 
             THEN("The created positions point to the same locations")
             {
@@ -192,9 +188,9 @@ SCENARIO("Converting cell grid <-> complete grid")
 
         WHEN("Converting complete grid points to valid cell grid points")
         {
-            Point point1 {maze.convertPoint({1, 1}, GridType::CELLS)};
-            Point point2 {maze.convertPoint({5, 1}, GridType::CELLS)};
-            Point point3 {maze.convertPoint({5, 3}, GridType::CELLS)};
+            Point point1{maze.convertPoint({1, 1}, GridType::CELLS)};
+            Point point2{maze.convertPoint({5, 1}, GridType::CELLS)};
+            Point point3{maze.convertPoint({5, 3}, GridType::CELLS)};
 
             THEN("The created positions point to the same locations")
             {
@@ -212,14 +208,25 @@ SCENARIO("Converting cell grid <-> complete grid")
         WHEN("Converting complete grid positions to invalid cell grid positions")
         {
             bool exception1{};
-            try {maze.convertPos(0, GridType::CELLS);} catch(const std::invalid_argument&) {exception1 = true;}
+            try {
+                maze.convertPos(0, GridType::CELLS);
+            } catch (const std::invalid_argument &) {
+                exception1 = true;
+            }
 
             bool exception2{};
-            try {maze.convertPos(1, GridType::CELLS);} catch(const std::invalid_argument&) {exception2 = true;}
+            try {
+                maze.convertPos(1, GridType::CELLS);
+            } catch (const std::invalid_argument &) {
+                exception2 = true;
+            }
 
             bool exception3{};
-            try {maze.convertPos(11, GridType::CELLS);} catch(const std::invalid_argument&) {exception3 = true;}
-
+            try {
+                maze.convertPos(11, GridType::CELLS);
+            } catch (const std::invalid_argument &) {
+                exception3 = true;
+            }
 
             THEN("Invalid argument exceptions are thrown")
             {
@@ -232,13 +239,25 @@ SCENARIO("Converting cell grid <-> complete grid")
         WHEN("Converting complete grid points to invalid cell grid points")
         {
             bool exception1{};
-            try {maze.convertPoint({0,0}, GridType::CELLS);} catch(const std::invalid_argument&) {exception1 = true;}
+            try {
+                maze.convertPoint({0, 0}, GridType::CELLS);
+            } catch (const std::invalid_argument &) {
+                exception1 = true;
+            }
 
             bool exception2{};
-            try {maze.convertPoint({1, 0}, GridType::CELLS);} catch(const std::invalid_argument&) {exception2 = true;}
+            try {
+                maze.convertPoint({1, 0}, GridType::CELLS);
+            } catch (const std::invalid_argument &) {
+                exception2 = true;
+            }
 
             bool exception3{};
-            try {maze.convertPoint({4, 1}, GridType::CELLS);} catch(const std::invalid_argument&) {exception3 = true;}
+            try {
+                maze.convertPoint({4, 1}, GridType::CELLS);
+            } catch (const std::invalid_argument &) {
+                exception3 = true;
+            }
 
             THEN("Invalid argument exceptions are thrown")
             {
@@ -251,67 +270,73 @@ SCENARIO("Converting cell grid <-> complete grid")
         WHEN("Converting out of range cell grid position to complete grid position")
         {
             bool exception{};
-            try {maze.convertPos(6, GridType::ALL);} catch (const std::out_of_range&) {exception = true;}
-
-            THEN("An out of range exception is thrown")
-            {
-                REQUIRE(exception);
+            try {
+                maze.convertPos(6, GridType::ALL);
+            } catch (const std::out_of_range &) {
+                exception = true;
             }
+
+            THEN("An out of range exception is thrown") { REQUIRE(exception); }
         }
 
         WHEN("Converting out of range complete grid position to cell grid position")
         {
             bool exception{};
-            try {maze.convertPos(36, GridType::CELLS);} catch (const std::out_of_range&) {exception = true;}
-
-            THEN("An out of range exception is thrown")
-            {
-                REQUIRE(exception);
+            try {
+                maze.convertPos(36, GridType::CELLS);
+            } catch (const std::out_of_range &) {
+                exception = true;
             }
+
+            THEN("An out of range exception is thrown") { REQUIRE(exception); }
         }
 
         WHEN("Converting out of range cell grid point to complete grid point")
         {
             bool exception{};
-            try {maze.convertPoint({3, 2}, GridType::ALL);} catch (const std::out_of_range&) {exception = true;}
-
-            THEN("An out of range exception is thrown")
-            {
-                REQUIRE(exception);
+            try {
+                maze.convertPoint({3, 2}, GridType::ALL);
+            } catch (const std::out_of_range &) {
+                exception = true;
             }
+
+            THEN("An out of range exception is thrown") { REQUIRE(exception); }
         }
 
         WHEN("Converting out of range complete grid point to cell grid point")
         {
             bool exception{};
-            try {maze.convertPoint({7, 5}, GridType::CELLS);} catch (const std::out_of_range&) {exception = true;}
-
-            THEN("An out of range exception is thrown")
-            {
-                REQUIRE(exception);
+            try {
+                maze.convertPoint({7, 5}, GridType::CELLS);
+            } catch (const std::out_of_range &) {
+                exception = true;
             }
+
+            THEN("An out of range exception is thrown") { REQUIRE(exception); }
         }
 
         WHEN("Converting out of range cell grid position to cell grid point")
         {
             bool exception{};
-            try {maze.convertToPoint(6, GridType::CELLS);} catch (const std::out_of_range&) {exception = true;}
-
-            THEN("An out of range exception is thrown")
-            {
-                REQUIRE(exception);
+            try {
+                maze.convertToPoint(6, GridType::CELLS);
+            } catch (const std::out_of_range &) {
+                exception = true;
             }
+
+            THEN("An out of range exception is thrown") { REQUIRE(exception); }
         }
 
         WHEN("Converting out of range cell grid point to cell grid position")
         {
             bool exception{};
-            try {maze.convertToPos({3, 2}, GridType::CELLS);} catch (const std::out_of_range&) {exception = true;}
-
-            THEN("An out of range exception is thrown")
-            {
-                REQUIRE(exception);
+            try {
+                maze.convertToPos({3, 2}, GridType::CELLS);
+            } catch (const std::out_of_range &) {
+                exception = true;
             }
+
+            THEN("An out of range exception is thrown") { REQUIRE(exception); }
         }
     }
 }
@@ -403,21 +428,17 @@ SCENARIO("Changing maze data", "[maze]")
             REQUIRE(!maze.get(15, GridType::ALL));
 
             bool wall1Exception{};
-            try
-            {
+            try {
                 maze.setWallOfCell({0, 0}, Direction::LEFT, true);
-            } catch(const std::runtime_error&)
-            {
+            } catch (const std::runtime_error &) {
                 wall1Exception = true;
             }
             REQUIRE(wall1Exception);
 
             bool wall2Exception{};
-            try
-            {
+            try {
                 maze.setWallOfCell(5, Direction::RIGHT, true);
-            } catch(const std::runtime_error&)
-            {
+            } catch (const std::runtime_error &) {
                 wall2Exception = true;
             }
             REQUIRE(wall2Exception);
@@ -426,11 +447,23 @@ SCENARIO("Changing maze data", "[maze]")
         WHEN("Changing out of range cells by cell grid point")
         {
             bool exception1{};
-            try {maze.set({3, 0}, GridType::CELLS, true);} catch(const std::out_of_range&) {exception1 = true;}
+            try {
+                maze.set({3, 0}, GridType::CELLS, true);
+            } catch (const std::out_of_range &) {
+                exception1 = true;
+            }
             bool exception2{};
-            try {maze.set({0, 2}, GridType::CELLS, true);} catch(const std::out_of_range&) {exception2 = true;}
+            try {
+                maze.set({0, 2}, GridType::CELLS, true);
+            } catch (const std::out_of_range &) {
+                exception2 = true;
+            }
             bool exception3{};
-            try {maze.set({3, 2}, GridType::CELLS, true);} catch(const std::out_of_range&) {exception3 = true;}
+            try {
+                maze.set({3, 2}, GridType::CELLS, true);
+            } catch (const std::out_of_range &) {
+                exception3 = true;
+            }
 
             THEN("An out of range exception is thrown")
             {
@@ -443,11 +476,23 @@ SCENARIO("Changing maze data", "[maze]")
         WHEN("Changing out of bounds cells by complete grid point")
         {
             bool exception1{};
-            try {maze.set({7, 0}, GridType::CELLS, true);} catch(const std::out_of_range&) {exception1 = true;}
+            try {
+                maze.set({7, 0}, GridType::CELLS, true);
+            } catch (const std::out_of_range &) {
+                exception1 = true;
+            }
             bool exception2{};
-            try {maze.set({0, 5}, GridType::CELLS, true);} catch(const std::out_of_range&) {exception2 = true;}
+            try {
+                maze.set({0, 5}, GridType::CELLS, true);
+            } catch (const std::out_of_range &) {
+                exception2 = true;
+            }
             bool exception3{};
-            try {maze.set({7, 5}, GridType::CELLS, true);} catch(const std::out_of_range&) {exception3 = true;}
+            try {
+                maze.set({7, 5}, GridType::CELLS, true);
+            } catch (const std::out_of_range &) {
+                exception3 = true;
+            }
 
             THEN("An out of range exception is thrown")
             {

@@ -13,34 +13,27 @@
 
 #include "exporter.h"
 
-
 class PNGExporter : public IExporter
 {
-public:
-    enum Compression
-    {
-        OFF, VERY_LOW, LOW, MEDIUM_LOW, MEDIUM, MEDIUM_HIGH, HIGH, VERY_HIGH, EXTREME, FULL
-    };
+  public:
+    enum Compression { OFF, VERY_LOW, LOW, MEDIUM_LOW, MEDIUM, MEDIUM_HIGH, HIGH, VERY_HIGH, EXTREME, FULL };
 
-    Compression mCompression {VERY_LOW};
+    Compression mCompression{VERY_LOW};
 
-public:
-    void save(const Maze &maze, const std::string& path) override;
-
+  public:
+    void save(const Maze &maze, const std::string &path) override;
 
     // ********** Getters **********
 
     Compression compression() const;
 
-
     // ********** Setters **********
 
     void setCompression(Compression compression);
 
-private:
+  private:
     png_bytepp generatePixelData(const Maze &maze);
-    void write(png_structp png, png_infop pngInfo, png_bytepp rows, const std::string& path);
+    void write(png_structp png, png_infop pngInfo, png_bytepp rows, const std::string &path);
 };
 
 #endif /* PNG_EXPORTER_H */
-

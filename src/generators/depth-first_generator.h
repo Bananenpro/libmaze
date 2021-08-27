@@ -13,9 +13,8 @@
 
 class DepthFirstGenerator : public IGenerator
 {
-public:
-    virtual void generate(Maze& maze);
+  public:
+    virtual void generate(Maze &maze);
 };
 
 #endif /* DEPTH_FIRST_GENERATOR_H */
-

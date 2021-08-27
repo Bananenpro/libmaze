@@ -15,33 +15,30 @@
 
 // ==================== PUBLIC ====================
 
-Maze PNGLoader::load(const std::string& path)
+Maze PNGLoader::load(const std::string &path)
 {
-    try
-    {
-        png_structp png {png_create_read_struct(PNG_LIBPNG_VER_STRING, nullptr, nullptr, nullptr)};
+    try {
+        png_structp png{png_create_read_struct(PNG_LIBPNG_VER_STRING, nullptr, nullptr, nullptr)};
         if (!png)
             throw std::runtime_error("Couldn't create png struct");
 
-        png_infop info {png_create_info_struct(png)};
+        png_infop info{png_create_info_struct(png)};
         if (!info)
             throw std::runtime_error("Couldn't create png info struct");
 
-        png_bytepp rows {readFile(png, info, path)};
-        Maze maze {constructMaze(rows, png_get_image_width(png, info), png_get_image_height(png, info))};
+        png_bytepp rows{readFile(png, info, path)};
+        Maze maze{constructMaze(rows, png_get_image_width(png, info), png_get_image_height(png, info))};
 
         png_destroy_read_struct(&png, &info, nullptr);
 
         setStage(STAGE_FINISHED);
 
         return maze;
-    } catch (const std::exception&)
-    {
+    } catch (const std::exception &) {
         setStage(STAGE_FAILURE);
         throw;
     }
 }
-
 
 // ==================== PRIVATE ====================
 
@@ -51,11 +48,9 @@ Maze PNGLoader::constructMaze(png_bytepp rows, std::size_t width, std::size_t he
 
     Maze maze((width - 1) / 2, (height - 1) / 2);
 
-    std::size_t loadedCells {};
-    for (std::size_t y{0}; y < height; ++y)
-    {
-        for (std::size_t x{0}; x < width; ++x)
-        {
+    std::size_t loadedCells{};
+    for (std::size_t y{0}; y < height; ++y) {
+        for (std::size_t x{0}; x < width; ++x) {
             if (rows[y][x] != 0 && rows[y][x] != 255)
                 throw std::runtime_error("Unknown color (only pure black(0) and pure white(255) are allowed)");
             maze.set({x, y}, GridType::ALL, rows[y][x]);
@@ -67,24 +62,19 @@ Maze PNGLoader::constructMaze(png_bytepp rows, std::size_t width, std::size_t he
 
     bool foundEntrace{};
     bool foundExit{};
-    for (std::size_t x{0}; x < maze.width(GridType::ALL); ++x)
-    {
-        if (maze.get({x, 0}, GridType::ALL))
-        {
+    for (std::size_t x{0}; x < maze.width(GridType::ALL); ++x) {
+        if (maze.get({x, 0}, GridType::ALL)) {
             maze.setEntrancePos(x, GridType::ALL);
             if (foundEntrace)
                 throw std::runtime_error("Multiple entrances are not allowed");
-            else
-                foundEntrace = true;
+            foundEntrace = true;
         }
 
-        if (maze.get({x, maze.height(GridType::ALL) - 1}, GridType::ALL))
-        {
+        if (maze.get({x, maze.height(GridType::ALL) - 1}, GridType::ALL)) {
             maze.setExitPos(x, GridType::ALL);
             if (foundExit)
                 throw std::runtime_error("Multiple exits are not allowed");
-            else
-                foundExit = true;
+            foundExit = true;
         }
     }
 
@@ -97,7 +87,7 @@ Maze PNGLoader::constructMaze(png_bytepp rows, std::size_t width, std::size_t he
     return maze;
 }
 
-png_bytepp PNGLoader::readFile(png_structp png, png_infop pngInfo, const std::string& path)
+png_bytepp PNGLoader::readFile(png_structp png, png_infop pngInfo, const std::string &path)
 {
     setStage(STAGE_READING);
     updateProgress(-1);
@@ -105,14 +95,12 @@ png_bytepp PNGLoader::readFile(png_structp png, png_infop pngInfo, const std::st
     png_byte header[8];
 
     FILE *fp = fopen(path.c_str(), "rb");
-    if (!fp)
-    {
+    if (!fp) {
         throw std::runtime_error("Couldn't open '" + path + "' for reading");
     }
 
     fread(header, 1, 8, fp);
-    if (png_sig_cmp(header, 0, 8))
-    {
+    if (png_sig_cmp(header, 0, 8)) {
         throw std::runtime_error("'" + path + "' is not a PNG file");
     }
 
@@ -120,7 +108,7 @@ png_bytepp PNGLoader::readFile(png_structp png, png_infop pngInfo, const std::st
     png_set_sig_bytes(png, 8);
     png_read_info(png, pngInfo);
 
-    unsigned int height {png_get_image_height(png, pngInfo)};
+    unsigned int height{png_get_image_height(png, pngInfo)};
 
     png_byte colorType = png_get_color_type(png, pngInfo);
     if (colorType != PNG_COLOR_TYPE_GRAY)
@@ -132,8 +120,8 @@ png_bytepp PNGLoader::readFile(png_structp png, png_infop pngInfo, const std::st
 
     png_read_update_info(png, pngInfo);
 
-    png_bytepp rows {new png_bytep[height]};
-    for (unsigned int y {0}; y < height; ++y)
+    png_bytepp rows{new png_bytep[height]};
+    for (unsigned int y{0}; y < height; ++y)
         rows[y] = new png_byte[png_get_rowbytes(png, pngInfo)];
 
     png_read_image(png, rows);

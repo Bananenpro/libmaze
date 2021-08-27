@@ -12,31 +12,23 @@
 #include <vector>
 
 #include "exporters/exporter.h"
-#include "loaders/loader.h"
 #include "generators/generator.h"
-
+#include "loaders/loader.h"
 
 // ********** Structs/Enums **********
 
-struct Point
-{
+struct Point {
     std::size_t x{};
     std::size_t y{};
 };
 
-enum class GridType
-{
-    ALL, CELLS
-};
+enum class GridType { ALL, CELLS };
 
-enum class Direction
-{
-    UP, RIGHT, DOWN, LEFT
-};
+enum class Direction { UP, RIGHT, DOWN, LEFT };
 
 class Maze final
 {
-private:
+  private:
     // holds maze data including cells and walls
     std::vector<bool> mData;
 
@@ -52,8 +44,7 @@ private:
     // x value of exit in cell grid
     std::size_t mExitPos;
 
-public:
-
+  public:
     // ********** Constructors/Destructor **********
 
     /**
@@ -69,19 +60,18 @@ public:
      */
     Maze(std::size_t width, std::size_t height, std::size_t entrancePos, std::size_t exitPos);
     ~Maze();
-private:
+
+  private:
     void init();
-public:
 
-
+  public:
     // ********** Converters **********
 
     std::size_t convertPos(std::size_t pos, GridType targetGridType) const;
-    Point convertPoint(const Point& point, GridType targetGridType) const;
+    Point convertPoint(const Point &point, GridType targetGridType) const;
 
-    std::size_t convertToPos(const Point& point, GridType gridType) const;
+    std::size_t convertToPos(const Point &point, GridType gridType) const;
     Point convertToPoint(std::size_t pos, GridType gridType) const;
-
 
     // ********** Getters **********
 
@@ -93,7 +83,7 @@ public:
     /**
      * @return true for open wall/active cell
      */
-    bool get(const Point& point, GridType gridType) const;
+    bool get(const Point &point, GridType gridType) const;
 
     /**
      * @param pos pos of cell in cell grid
@@ -105,7 +95,7 @@ public:
      * @param point coords of cell in cell grid
      * @return true for open wall
      */
-    bool getWallOfCell(const Point& point, Direction direction) const;
+    bool getWallOfCell(const Point &point, Direction direction) const;
 
     std::size_t width(GridType gridType) const;
     std::size_t height(GridType gridType) const;
@@ -121,7 +111,6 @@ public:
      */
     std::size_t exitPos(GridType gridType) const;
 
-    
     // ********** Setters **********
 
     /**
@@ -132,7 +121,7 @@ public:
     /**
      * @param value true for open wall/active cell
      */
-    void set(const Point& point, GridType gridType, bool value);
+    void set(const Point &point, GridType gridType, bool value);
 
     /**
      * @param pos pos of cell in cell grid
@@ -144,8 +133,8 @@ public:
      * @param point coords of cell in cell grid
      * @param value true for open wall
      */
-    void setWallOfCell(const Point& point, Direction direction, bool value);
-    
+    void setWallOfCell(const Point &point, Direction direction, bool value);
+
     /**
      * @param pos x value of entrance
      */
@@ -162,16 +151,16 @@ public:
     void clear();
 
     // ********** Other **********
-    
-    void save(IExporter& exporter, const std::string& path) const;
-    static Maze load(ILoader& loader, const std::string& path);
-    void generate(IGenerator& generator);
 
-private:
+    void save(IExporter &exporter, const std::string &path) const;
+    static Maze load(ILoader &loader, const std::string &path);
+    void generate(IGenerator &generator);
+
+  private:
     std::size_t getIndexOf(std::size_t pos, GridType gridType) const;
-    std::size_t getIndexOf(const Point& point, GridType gridType) const;
+    std::size_t getIndexOf(const Point &point, GridType gridType) const;
     std::size_t getIndexOfWallOfCell(std::size_t pos, Direction direction) const;
-    std::size_t getIndexOfWallOfCell(const Point& point, Direction direction) const;
+    std::size_t getIndexOfWallOfCell(const Point &point, Direction direction) const;
 };
 
 #endif /* MAZE_H */

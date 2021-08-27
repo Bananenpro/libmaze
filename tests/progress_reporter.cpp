@@ -5,8 +5,8 @@
  * @license     : MIT
  */
 
-#include <cmath>
 #include <catch2/catch.hpp>
+#include <cmath>
 
 #include "../src/progress_reporter.h"
 
@@ -16,11 +16,8 @@ SCENARIO("Registering and calling callbacks")
     {
         class Test : public ProgressReporter
         {
-        public:
-            enum Stage
-            {
-                STAGE_WORKING
-            };
+          public:
+            enum Stage { STAGE_WORKING };
 
             void testCallbacks()
             {
@@ -40,17 +37,15 @@ SCENARIO("Registering and calling callbacks")
 
         WHEN("Calling the callbacks with two registered callbacks")
         {
-            int callback1CallCount {0};
-            int callback2CallCount {0};
+            int callback1CallCount{0};
+            int callback2CallCount{0};
 
-            test.addCallback([&callback1CallCount](int stage, long millis, float progress) 
-            {
+            test.addCallback([&callback1CallCount](int stage, long millis, float progress) {
                 if (stage == Test::STAGE_WORKING)
                     ++callback1CallCount;
             });
 
-            test.addCallback([&callback2CallCount](int stage, long millis, float progress) 
-            {
+            test.addCallback([&callback2CallCount](int stage, long millis, float progress) {
                 if (stage == Test::STAGE_WORKING)
                     ++callback2CallCount;
             });

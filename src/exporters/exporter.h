@@ -9,9 +9,9 @@
 
 // ********** Includes **********
 
-#include <string_view>
-#include <vector>
 #include <functional>
+#include <string>
+#include <vector>
 
 #include "../progress_reporter.h"
 
@@ -19,17 +19,13 @@ class Maze;
 
 class IExporter : public ProgressReporter
 {
-public:
-    enum Stage
-    {
-        STAGE_PREPARING, STAGE_WRITING
-    };
+  public:
+    enum Stage { STAGE_PREPARING, STAGE_WRITING };
 
-public:
+  public:
     virtual ~IExporter() {}
 
-    virtual void save(const Maze& maze, const std::string& path) = 0;
+    virtual void save(const Maze &maze, const std::string &path) = 0;
 };
 
 #endif /* EXPORTER_H */
-

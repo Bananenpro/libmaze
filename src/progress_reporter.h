@@ -9,22 +9,19 @@
 
 // ********** Includes **********
 
+#include <functional>
 #include <string_view>
 #include <vector>
-#include <functional>
 
 class ProgressReporter
 {
-public:
-    enum Stage
-    {
-        STAGE_FAILURE=-2, STAGE_NONE=-1, STAGE_FINISHED=100
-    };
+  public:
+    enum Stage { STAGE_FAILURE = -2, STAGE_NONE = -1, STAGE_FINISHED = 100 };
 
     // void callback(Stage stage, long millis, float progress) <- progress: 0-100
     using callback_t = std::function<void(int, long, float)>;
 
-private:
+  private:
     std::vector<callback_t> mCallbacks;
     long mStartTime{currentTimeMillis()};
     long mLastCallback{};
@@ -33,7 +30,7 @@ private:
     int mStage{STAGE_NONE};
     float mProgress{0};
 
-public:
+  public:
     virtual ~ProgressReporter() {}
 
     // ********** Getters **********
@@ -51,7 +48,6 @@ public:
     std::size_t callbackCount() const;
 
     int stage() const;
-
 
     // ********** Setters **********
 
@@ -76,10 +72,9 @@ public:
      */
     void updateProgress(float progress);
 
-private:
+  private:
     void callCallbacks();
     long currentTimeMillis() const;
 };
 
 #endif /* PROGRESS_REPORTER_H */
-

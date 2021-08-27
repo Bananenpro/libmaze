@@ -15,42 +15,35 @@
 
 // ==================== PUBLIC ====================
 
-void PNGExporter::save(const Maze &maze, const std::string& path)
+void PNGExporter::save(const Maze &maze, const std::string &path)
 {
-    try
-    {
-        png_structp png {nullptr};
-        png_infop info {nullptr};
-
+    try {
+        png_structp png{nullptr};
+        png_infop info{nullptr};
 
         png = png_create_write_struct(PNG_LIBPNG_VER_STRING, nullptr, nullptr, nullptr);
-        if (!png)
-        {
+        if (!png) {
             throw std::runtime_error("Couldn't create png struct");
         }
 
         info = png_create_info_struct(png);
-        if (!info)
-        {
+        if (!info) {
             throw std::runtime_error("Couldn't create png info struct");
         }
 
         png_set_compression_level(png, static_cast<int>(mCompression));
-        png_set_IHDR(png, info, maze.width(GridType::ALL), maze.height(GridType::ALL), 8, PNG_COLOR_TYPE_GRAY, PNG_INTERLACE_NONE, PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
+        png_set_IHDR(png, info, maze.width(GridType::ALL), maze.height(GridType::ALL), 8, PNG_COLOR_TYPE_GRAY,
+                     PNG_INTERLACE_NONE, PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
 
-        png_bytepp rows {nullptr};
+        png_bytepp rows{nullptr};
 
-        try
-        {
+        try {
             rows = generatePixelData(maze);
             write(png, info, rows, path);
 
             setStage(STAGE_FINISHED);
-        }
-        catch (const std::exception&)
-        {
-            for(std::size_t y{0}; y < maze.height(GridType::ALL); ++y)
-            {
+        } catch (const std::exception &) {
+            for (std::size_t y{0}; y < maze.height(GridType::ALL); ++y) {
                 delete[] rows[y];
             }
             delete[] rows;
@@ -59,29 +52,19 @@ void PNGExporter::save(const Maze &maze, const std::string& path)
 
             throw;
         }
-    } catch (const std::exception&)
-    {
+    } catch (const std::exception &) {
         setStage(STAGE_FAILURE);
         throw;
     }
 }
 
-
 // ********** Getters **********
 
-PNGExporter::Compression PNGExporter::compression() const
-{
-    return mCompression;
-}
-
+PNGExporter::Compression PNGExporter::compression() const { return mCompression; }
 
 // ********** Setters **********
 
-void PNGExporter::setCompression(Compression compression)
-{
-    mCompression = compression;
-}
-
+void PNGExporter::setCompression(Compression compression) { mCompression = compression; }
 
 // ==================== PRIVATE ====================
 
@@ -89,16 +72,14 @@ png_bytepp PNGExporter::generatePixelData(const Maze &maze)
 {
     setStage(STAGE_PREPARING);
 
-    std::size_t calculatedPixels {0};
+    std::size_t calculatedPixels{0};
 
     png_bytepp rows = new png_bytep[maze.height(GridType::ALL)];
 
-    for (std::size_t y{0}; y < maze.height(GridType::ALL); ++y)
-    {
+    for (std::size_t y{0}; y < maze.height(GridType::ALL); ++y) {
         rows[y] = new uint8_t[maze.width(GridType::ALL)];
 
-        for (std::size_t x{0}; x < maze.width(GridType::ALL); ++x)
-        {
+        for (std::size_t x{0}; x < maze.width(GridType::ALL); ++x) {
             uint8_t colorValue = maze.get({x, y}, GridType::ALL) ? 255 : 0;
 
             rows[y][x] = colorValue;
@@ -112,14 +93,13 @@ png_bytepp PNGExporter::generatePixelData(const Maze &maze)
     return rows;
 }
 
-void PNGExporter::write(png_structp png, png_infop pngInfo, png_bytepp rows, const std::string& path)
+void PNGExporter::write(png_structp png, png_infop pngInfo, png_bytepp rows, const std::string &path)
 {
     setStage(STAGE_WRITING);
 
-    FILE *fp {fopen(path.c_str(), "wb")};
+    FILE *fp{fopen(path.c_str(), "wb")};
 
-    if (!fp)
-    {
+    if (!fp) {
         throw std::runtime_error("Couldn't open file '" + path + "' for writing'");
     }
 
@@ -129,8 +109,7 @@ void PNGExporter::write(png_structp png, png_infop pngInfo, png_bytepp rows, con
     static ProgressReporter progressReporter = *this;
     static std::size_t rowCount = height;
 
-    png_set_write_status_fn(png, [](png_structp png_ptr, png_uint_32 row, int pass)
-    {
+    png_set_write_status_fn(png, [](png_structp png_ptr, png_uint_32 row, int pass) {
         progressReporter.updateProgress((float)row / rowCount);
     });
 

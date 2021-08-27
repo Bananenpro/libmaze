@@ -7,9 +7,9 @@
 
 #include <catch2/catch.hpp>
 
-#include "../../src/maze.h"
-#include "../../src/generators/depth-first_generator.h"
 #include "../../src/exporters/png_exporter.h"
+#include "../../src/generators/depth-first_generator.h"
+#include "../../src/maze.h"
 
 SCENARIO("Generating a maze using the depth-first search algorithm")
 {
@@ -24,13 +24,11 @@ SCENARIO("Generating a maze using the depth-first search algorithm")
             float generatingProgress{};
             bool generatingFinished{};
 
-            generator.addCallback([&generatingProgress, &generatingFinished](int stage, long millis, float progress)
-            { 
+            generator.addCallback([&generatingProgress, &generatingFinished](int stage, long millis, float progress) {
                 REQUIRE(progress >= 0);
                 REQUIRE(progress <= 1);
 
-                switch(stage)
-                {
+                switch (stage) {
                 case DepthFirstGenerator::STAGE_GENERATING:
                     generatingProgress = progress;
                 case DepthFirstGenerator::STAGE_FINISHED:
@@ -49,10 +47,8 @@ SCENARIO("Generating a maze using the depth-first search algorithm")
             THEN("All cells are active")
             {
                 bool allActive{true};
-                for (std::size_t i{}; i < maze.size(GridType::CELLS); ++i)
-                {
-                    if (!maze.get(i, GridType::CELLS))
-                    {
+                for (std::size_t i{}; i < maze.size(GridType::CELLS); ++i) {
+                    if (!maze.get(i, GridType::CELLS)) {
                         allActive = false;
                     }
                 }
@@ -62,4 +58,3 @@ SCENARIO("Generating a maze using the depth-first search algorithm")
         }
     }
 }
-

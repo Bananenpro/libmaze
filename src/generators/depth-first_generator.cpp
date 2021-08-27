@@ -10,62 +10,58 @@
 #include <stack>
 #include <vector>
 
-#include "depth-first_generator.h"
 #include "../maze.h"
 #include "../random.h"
+#include "depth-first_generator.h"
 
 // ==================== PUBLIC ====================
 
-void DepthFirstGenerator::generate(Maze& maze)
+void DepthFirstGenerator::generate(Maze &maze)
 {
     if (maze.size(GridType::CELLS) == 0)
         return;
 
-    try
-    {
+    try {
         setStage(STAGE_GENERATING);
 
         maze.clear();
 
         std::stack<Point> stack{};
 
-        Point currentCell {};
+        Point currentCell{};
         maze.set(currentCell, GridType::CELLS, true);
         stack.push(currentCell);
 
         std::size_t visitedCells{1};
 
-        while(!stack.empty())
-        {
+        while (!stack.empty()) {
             currentCell = stack.top();
             stack.pop();
 
             std::vector<Direction> possibleDirections;
 
-
             if (currentCell.y > 0 && !maze.get({currentCell.x, currentCell.y - 1}, GridType::CELLS))
                 possibleDirections.push_back(Direction::UP);
 
-            if (currentCell.x < maze.width(GridType::CELLS) - 1 && !maze.get({currentCell.x + 1, currentCell.y}, GridType::CELLS))
+            if (currentCell.x < maze.width(GridType::CELLS) - 1 &&
+                !maze.get({currentCell.x + 1, currentCell.y}, GridType::CELLS))
                 possibleDirections.push_back(Direction::RIGHT);
 
-            if (currentCell.y < maze.height(GridType::CELLS) - 1 && !maze.get({currentCell.x, currentCell.y + 1}, GridType::CELLS))
+            if (currentCell.y < maze.height(GridType::CELLS) - 1 &&
+                !maze.get({currentCell.x, currentCell.y + 1}, GridType::CELLS))
                 possibleDirections.push_back(Direction::DOWN);
 
             if (currentCell.x > 0 && !maze.get({currentCell.x - 1, currentCell.y}, GridType::CELLS))
                 possibleDirections.push_back(Direction::LEFT);
 
-
-            if (!possibleDirections.empty())
-            {
+            if (!possibleDirections.empty()) {
                 stack.push(currentCell);
 
-                Direction direction {possibleDirections[random<int>(0, possibleDirections.size() - 1)]};
+                Direction direction{possibleDirections[random<int>(0, possibleDirections.size() - 1)]};
 
                 maze.setWallOfCell(currentCell, direction, true);
 
-                switch(direction)
-                {
+                switch (direction) {
                 case Direction::UP:
                     currentCell = {currentCell.x, currentCell.y - 1};
                     break;
@@ -90,8 +86,7 @@ void DepthFirstGenerator::generate(Maze& maze)
         }
 
         setStage(STAGE_FINISHED);
-    } catch (const std::exception&)
-    {
+    } catch (const std::exception &) {
         setStage(STAGE_FAILURE);
         throw;
     }

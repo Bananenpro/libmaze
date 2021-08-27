@@ -8,9 +8,9 @@
 #include <catch2/catch.hpp>
 #include <iostream>
 
-#include "../../src/maze.h"
 #include "../../src/exporters/png_exporter.h"
 #include "../../src/loaders/png_loader.h"
+#include "../../src/maze.h"
 
 SCENARIO("Exporting/loading maze as png")
 {
@@ -18,9 +18,8 @@ SCENARIO("Exporting/loading maze as png")
     {
         Maze maze(10, 10);
 
-        for (std::size_t i{0}; i < maze.size(GridType::CELLS); ++i)
-        {
-            Point p {maze.convertToPoint(i, GridType::CELLS)};
+        for (std::size_t i{0}; i < maze.size(GridType::CELLS); ++i) {
+            Point p{maze.convertToPoint(i, GridType::CELLS)};
             maze.set(p, GridType::CELLS, true);
 
             if (p.y > 0)
@@ -32,7 +31,7 @@ SCENARIO("Exporting/loading maze as png")
             if (p.y < maze.height(GridType::CELLS) - 1)
                 maze.setWallOfCell(p, Direction::DOWN, true);
 
-            if (p.x  > 0)
+            if (p.x > 0)
                 maze.setWallOfCell(p, Direction::LEFT, true);
         }
 
@@ -44,12 +43,11 @@ SCENARIO("Exporting/loading maze as png")
             float exportWritingProgress{};
             bool exportFinished{};
 
-            exporter.addCallback([&exportPreparingProgress, &exportWritingProgress, &exportFinished](int stage, long millis, float progress)
-            {
+            exporter.addCallback([&exportPreparingProgress, &exportWritingProgress,
+                                  &exportFinished](int stage, long millis, float progress) {
                 REQUIRE(!(progress < 0 || progress > 1));
 
-                switch(stage)
-                {
+                switch (stage) {
                 case PNGExporter::STAGE_PREPARING:
                     exportPreparingProgress = progress;
                     break;
@@ -82,12 +80,11 @@ SCENARIO("Exporting/loading maze as png")
                     float loadWorkingProgress{};
                     bool loadFinished{};
 
-                    loader.addCallback([&loadReadingProgress, &loadWorkingProgress, &loadFinished](int stage, long millis, float progress)
-                    {
+                    loader.addCallback([&loadReadingProgress, &loadWorkingProgress,
+                                        &loadFinished](int stage, long millis, float progress) {
                         REQUIRE(!((progress < 0 && progress != -1) || progress > 1));
 
-                        switch(stage)
-                        {
+                        switch (stage) {
                         case PNGLoader::STAGE_READING:
                             loadReadingProgress = progress;
                             break;
@@ -102,7 +99,7 @@ SCENARIO("Exporting/loading maze as png")
                         }
                     });
 
-                    Maze loadedMaze {Maze::load(loader, "maze.png")};
+                    Maze loadedMaze{Maze::load(loader, "maze.png")};
 
                     THEN("All progress callbacks are working")
                     {
@@ -117,10 +114,8 @@ SCENARIO("Exporting/loading maze as png")
                         REQUIRE(maze.height(GridType::ALL) == loadedMaze.height(GridType::ALL));
 
                         bool allCellsSame{true};
-                        for (int i{}; i < maze.size(GridType::ALL); ++i)
-                        {
-                            if (maze.get(i, GridType::ALL) != loadedMaze.get(i, GridType::ALL))
-                            {
+                        for (int i{}; i < maze.size(GridType::ALL); ++i) {
+                            if (maze.get(i, GridType::ALL) != loadedMaze.get(i, GridType::ALL)) {
                                 allCellsSame = false;
                                 break;
                             }

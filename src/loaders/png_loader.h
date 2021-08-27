@@ -13,16 +13,14 @@
 
 #include "loader.h"
 
-
 class PNGLoader : public ILoader
 {
-public:
-    Maze load(const std::string& path) override;
+  public:
+    Maze load(const std::string &path) override;
 
-private:
+  private:
     Maze constructMaze(png_bytepp rows, std::size_t width, std::size_t height);
-    png_bytepp readFile(png_structp png, png_infop pngInfo, const std::string& path);
+    png_bytepp readFile(png_structp png, png_infop pngInfo, const std::string &path);
 };
 
 #endif /* PNG_LOADER_H */
-
