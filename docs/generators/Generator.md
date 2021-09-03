@@ -12,14 +12,17 @@ In addition to that IGenerator provides the following stages:
 
 ### Implementations
 - [DepthFirstGenerator](DepthFirstGenerator.md)
+- [AldousBroderGenerator](AldousBroderGenerator.md)
 
 ### Implementing IGenerator
 A class that implements IExporter needs to define all of the below member functions:
 - `virtual void generate(Maze& maze)`
-    - This method is responsible clearing and then generating the provided maze.
-    - This method should report its progress to the underlying [ProgressReporter](../ProgressReporter.md) implementation by calling following methods
-        - `void setStage(Stage stage)` when the stage changes
-        - `void updateProgress(float progress)` when the progress changes
+  - This method is responsible clearing and then generating the provided maze.
+  - This method should report its progress to the underlying
+  [ProgressReporter](../ProgressReporter.md)
+  implementation by calling following methods
+    - `void setStage(Stage stage)` when the stage changes
+    - `void updateProgress(float progress)` when the progress changes
 
 ---
 [Go to home](../Home.md)\

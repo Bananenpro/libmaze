@@ -111,6 +111,11 @@ class Maze final
      */
     std::size_t exitPos(GridType gridType) const;
 
+    /**
+     * @return all neighbors of cell in cell grid
+     */
+    std::vector<std::pair<Point, Direction>> getNeighbors(Point point, bool onlyUnvisited);
+
     // ********** Setters **********
 
     /**

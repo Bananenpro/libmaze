@@ -1,17 +1,19 @@
 # libmaze documentation
 
-#### [Quick Start](QuickStart.md)
+## [Quick Start](QuickStart.md)
 
-### Table of Contents
+## Table of Contents
+
 - [Maze class](Maze.md)
 - [Utilities](Utils.md)
 - [IGenerator interface](generators/Generator.md)
-    - [DepthFirstGenerator class](generators/DepthFirstGenerator.md)
+  - [DepthFirstGenerator class](generators/DepthFirstGenerator.md)
+  - [AldousBroderGenerator class](generators/AldousBroderGenerator.md)
 - Exporting/Loading
-    - [IExporter interface](exporters/Exporter.md)
-        - [PNGExporter class](exporters/PNGExporter.md)
-    - [ILoader interface](loaders/Loader.md)
-        - [PNGLoader class](loaders/PNGLoader.md)
+  - [IExporter interface](exporters/Exporter.md)
+    - [PNGExporter class](exporters/PNGExporter.md)
+  - [ILoader interface](loaders/Loader.md)
+    - [PNGLoader class](loaders/PNGLoader.md)
 - [ProgressReporter class](ProgressReporter.md)
 
 ---

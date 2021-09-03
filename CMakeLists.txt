@@ -13,6 +13,7 @@ set(
   ${SRC_DIR}/progress_reporter.cpp
   ${SRC_DIR}/random.cpp
   ${SRC_DIR}/generators/depth-first_generator.cpp
+  ${SRC_DIR}/generators/aldous-broder_generator.cpp
   ${SRC_DIR}/exporters/png_exporter.cpp
   ${SRC_DIR}/loaders/png_loader.cpp
 )
@@ -28,6 +29,7 @@ set(
   ${TEST_DIR}/progress_reporter.cpp
   ${TEST_DIR}/export-load/png.cpp
   ${TEST_DIR}/generators/depth-first_generator.cpp
+  ${TEST_DIR}/generators/aldous-broder_generator.cpp
 )
 add_executable(tests ${TEST})
 target_link_libraries(tests Catch2::Catch2 ${PROJECT_NAME})

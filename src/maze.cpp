@@ -207,6 +207,27 @@ Maze Maze::load(ILoader &loader, const std::string &path) { return loader.load(p
 
 void Maze::generate(IGenerator &generator) { generator.generate(*this); }
 
+std::vector<std::pair<Point, Direction>> Maze::getNeighbors(Point point, bool onlyUnvisited)
+{
+    std::vector<std::pair<Point, Direction>> neighbors;
+
+    if (point.y > 0 && (!onlyUnvisited || !get({point.x, point.y - 1}, GridType::CELLS)))
+        neighbors.push_back({{point.x, point.y - 1}, Direction::UP});
+
+    if (point.x < width(GridType::CELLS) - 1 &&
+        (!onlyUnvisited || !get({point.x + 1, point.y}, GridType::CELLS)))
+        neighbors.push_back({{point.x + 1, point.y}, Direction::RIGHT});
+
+    if (point.y < height(GridType::CELLS) - 1 &&
+        (!onlyUnvisited || !get({point.x, point.y + 1}, GridType::CELLS)))
+        neighbors.push_back({{point.x, point.y + 1}, Direction::DOWN});
+
+    if (point.x > 0 && (!onlyUnvisited || !get({point.x - 1, point.y}, GridType::CELLS)))
+        neighbors.push_back({{point.x - 1, point.y}, Direction::LEFT});
+
+    return neighbors;
+}
+
 // ==================== PRIVATE ====================
 
 // ********** Get Index **********

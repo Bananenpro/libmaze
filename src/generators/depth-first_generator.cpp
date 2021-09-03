@@ -38,43 +38,15 @@ void DepthFirstGenerator::generate(Maze &maze)
             currentCell = stack.top();
             stack.pop();
 
-            std::vector<Direction> possibleDirections;
+            std::vector<std::pair<Point, Direction>> neighbors {maze.getNeighbors(currentCell, true)};
 
-            if (currentCell.y > 0 && !maze.get({currentCell.x, currentCell.y - 1}, GridType::CELLS))
-                possibleDirections.push_back(Direction::UP);
-
-            if (currentCell.x < maze.width(GridType::CELLS) - 1 &&
-                !maze.get({currentCell.x + 1, currentCell.y}, GridType::CELLS))
-                possibleDirections.push_back(Direction::RIGHT);
-
-            if (currentCell.y < maze.height(GridType::CELLS) - 1 &&
-                !maze.get({currentCell.x, currentCell.y + 1}, GridType::CELLS))
-                possibleDirections.push_back(Direction::DOWN);
-
-            if (currentCell.x > 0 && !maze.get({currentCell.x - 1, currentCell.y}, GridType::CELLS))
-                possibleDirections.push_back(Direction::LEFT);
-
-            if (!possibleDirections.empty()) {
+            if (!neighbors.empty()) {
                 stack.push(currentCell);
 
-                Direction direction{possibleDirections[random<int>(0, possibleDirections.size() - 1)]};
+                std::size_t randomIndex {random<std::size_t>(0, neighbors.size() - 1)};
+                maze.setWallOfCell(currentCell, neighbors[randomIndex].second, true);
 
-                maze.setWallOfCell(currentCell, direction, true);
-
-                switch (direction) {
-                case Direction::UP:
-                    currentCell = {currentCell.x, currentCell.y - 1};
-                    break;
-                case Direction::RIGHT:
-                    currentCell = {currentCell.x + 1, currentCell.y};
-                    break;
-                case Direction::DOWN:
-                    currentCell = {currentCell.x, currentCell.y + 1};
-                    break;
-                case Direction::LEFT:
-                    currentCell = {currentCell.x - 1, currentCell.y};
-                    break;
-                }
+                currentCell = neighbors[randomIndex].first;
 
                 maze.set(currentCell, GridType::CELLS, true);
                 ++visitedCells;
