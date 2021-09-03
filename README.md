@@ -89,5 +89,8 @@ Run the following command in the build directory after building:
 ./tests
 ```
 
+After running the tests you can manually check the outcome of all algorithms
+by checking the corresponding _png_ file (e.g. `depth-first.png`).
+
 ---
 Copyright © Julian Hofmann
