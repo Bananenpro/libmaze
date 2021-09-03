@@ -4,7 +4,8 @@ Header: [`loaders/png_loader.h`](../../src/loaders/png_loader.h)
 
 Implementation of [ILoader](Exporter.md) for loading mazes from *png* files.
 
-# Example usage
+## Example usage
+
 ```c++
 PNGLoader loader;
 

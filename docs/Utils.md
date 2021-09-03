@@ -1,6 +1,7 @@
 # Utilities
 
-### Random
+## Random
+
 Header: [`random.h`](../src/random.h)
 
 `T random(T min, T max)`

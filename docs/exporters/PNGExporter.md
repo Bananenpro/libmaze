@@ -4,7 +4,8 @@ Header: [`exporters/png_exporter.h`](../../src/exporters/png_exporter.h)
 
 Implementation of [IExporter](Exporter.md) for saving mazes as *png* files.
 
-# Example usage
+## Example usage
+
 ```c++
 Maze maze(100, 100);
 
