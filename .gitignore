@@ -4,3 +4,4 @@ vgcore.*
 Session.vim
 compile-flags.txt
 .clang-format
+libmaze/

@@ -83,7 +83,8 @@ make
 
 ### Running tests
 
-Run the following command in the build directory after building:
+Run the following command in the build directory after [building](#Building)
+**as debug build**:
 
 ```sh
 ./tests

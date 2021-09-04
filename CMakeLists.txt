@@ -21,6 +21,7 @@ set(
 add_library(${PROJECT_NAME} SHARED ${SRC})
 target_link_libraries(${PROJECT_NAME} -lpng)
 
+if (CMAKE_BUILD_TYPE STREQUAL "Debug")
 find_package(Catch2 REQUIRED)
 set(
   TEST
@@ -33,3 +34,4 @@ set(
 )
 add_executable(tests ${TEST})
 target_link_libraries(tests Catch2::Catch2 ${PROJECT_NAME})
+endif()
