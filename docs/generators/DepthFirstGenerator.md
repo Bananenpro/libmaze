@@ -3,7 +3,7 @@
 Header: [`generators/depth-first_generator.h`](../../src/generators/depth-first_generator.h)
 
 Implementation of [IGenerator](Generator.md) for generating mazes using the
-[randomized depth-first search](https://www.wikiwand.com/en/Maze_generation_algorithm#Randomized_depth-first_search)
+[randomized depth-first search](https://en.wikipedia.org/wiki/Maze_generation_algorithm#Randomized_depth-first_search)
 algorithm.
 
 ## Example usage
