@@ -3,7 +3,7 @@
 Header: [`generators/aldous-broder_generator.h`](../../src/generators/aldous-broder_generator.h)
 
 Implementation of [IGenerator](Generator.md) for generating mazes using the
-[Aldous-Broder algorithm](https://www.wikiwand.com/en/Maze_generation_algorithm#Aldous-Broder_algorithm)
+[Aldous-Broder algorithm](https://en.wikipedia.org/wiki/Maze_generation_algorithm#Aldous-Broder_algorithm)
 algorithm.
 
 ## Example usage
