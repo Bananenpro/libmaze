@@ -54,8 +54,7 @@ void ProgressReporter::setStage(int stage)
 
 void ProgressReporter::updateProgress(float progress)
 {
-    if ((progress < 0 && mProgress >= 0) || (progress == 1 && mProgress < 1) ||
-        progress - mProgress >= mCallbackPrecision || currentTimeMillis() - mLastCallback > mMaxCallbackInterval) {
+    if (progress - mProgress >= mCallbackPrecision || (progress < 0 && mProgress >= 0) || (progress == 1 && mProgress < 1)) {
         mProgress = progress;
         callCallbacks();
     }
@@ -66,8 +65,9 @@ void ProgressReporter::updateProgress(float progress)
 void ProgressReporter::callCallbacks()
 {
     if (stage() != STAGE_NONE) {
+        long millis {currentTimeMillis()};
         for (callback_t cb : mCallbacks) {
-            cb(stage(), currentTimeMillis() - mStartTime, mProgress);
+            cb(stage(), millis - mStartTime, mProgress);
         }
 
         mLastCallback = currentTimeMillis();

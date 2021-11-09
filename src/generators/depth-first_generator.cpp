@@ -7,7 +7,6 @@
 
 // ********** Includes **********
 
-#include <stack>
 #include <vector>
 
 #include "../maze.h"
@@ -26,22 +25,23 @@ void DepthFirstGenerator::generate(Maze &maze)
 
         maze.clear();
 
-        std::stack<Point> stack{};
+        std::vector<Point> stack{};
+        stack.reserve(maze.size(GridType::ALL) / 2);
 
         Point currentCell{};
         maze.set(currentCell, GridType::CELLS, true);
-        stack.push(currentCell);
+        stack.push_back(currentCell);
 
         std::size_t visitedCells{1};
 
         while (!stack.empty()) {
-            currentCell = stack.top();
-            stack.pop();
+            currentCell = stack[stack.size() - 1];
+            stack.pop_back();
 
             std::vector<std::pair<Point, Direction>> neighbors {maze.getNeighbors(currentCell, true)};
 
             if (!neighbors.empty()) {
-                stack.push(currentCell);
+                stack.push_back(currentCell);
 
                 std::size_t randomIndex {random<std::size_t>(0, neighbors.size() - 1)};
                 maze.setWallOfCell(currentCell, neighbors[randomIndex].second, true);
@@ -53,7 +53,7 @@ void DepthFirstGenerator::generate(Maze &maze)
 
                 updateProgress((float)visitedCells / maze.size(GridType::CELLS));
 
-                stack.push(currentCell);
+                stack.push_back(currentCell);
             }
         }
 

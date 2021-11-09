@@ -4,7 +4,7 @@ rm -rf build &&
 mkdir build &&
 cd build &&
 cmake -DCMAKE_BUILD_TYPE=Release .. &&
-make &&
+make -j$(nproc) &&
 cd .. &&
 rm -rf libmaze &&
 mkdir libmaze &&
