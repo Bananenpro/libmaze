@@ -23,24 +23,24 @@ A simple and extensible C++20 library for creating and solving mazes.
         - Load json files created using `JSONExporter`
 - Generate mazes
   - [x] Generator interface
-  - [x] [Randomized depth-first search](https://www.wikiwand.com/en/Maze_generation_algorithm#Randomized_depth-first_search)
-  - [ ] [Wilson's algorithm](https://www.wikiwand.com/en/Maze_generation_algorithm#Wilson's_algorithm)
-  - [x] [Aldous-Broder algorithm](https://www.wikiwand.com/en/Maze_generation_algorithm#Aldous-Broder_algorithm)
-  - [ ] [Randomized Kruskal's algorithm](https://www.wikiwand.com/en/Maze_generation_algorithm#Randomized_Kruskal's_algorithm)
-  - [ ] [Randomized Prim's algorithm](https://www.wikiwand.com/en/Maze_generation_algorithm#Randomized_Prim's_algorithm)
-  - [ ] [Recursive division method](https://www.wikiwand.com/en/Maze_generation_algorithm#Recursive_division_method)
-  - [ ] [Simple algorithms](https://www.wikiwand.com/en/Maze_generation_algorithm#Simple_algorithms)
-  - [ ] [Cellular automata](https://www.wikiwand.com/en/Maze_generation_algorithm#Cellular_automaton_algorithms)
+  - [x] [Randomized depth-first search](https://en.wikipedia.org/wiki/Maze_generation_algorithm#Randomized_depth-first_search)
+  - [ ] [Wilson's algorithm](https://en.wikipedia.org/wiki/Maze_generation_algorithm#Wilson's_algorithm)
+  - [x] [Aldous-Broder algorithm](https://en.wikipedia.org/wiki/Maze_generation_algorithm#Aldous-Broder_algorithm)
+  - [ ] [Randomized Kruskal's algorithm](https://en.wikipedia.org/wiki/Maze_generation_algorithm#Randomized_Kruskal's_algorithm)
+  - [ ] [Randomized Prim's algorithm](https://en.wikipedia.org/wiki/Maze_generation_algorithmm#Randomized_Prim's_algorithm)
+  - [ ] [Recursive division method](https://en.wikipedia.org/wiki/Maze_generation_algorithm#Recursive_division_method)
+  - [ ] [Simple algorithms](https://en.wikipedia.org/wiki/Maze_generation_algorithm#Simple_algorithms)
+  - [ ] [Cellular automata](https://en.wikipedia.org/wiki/Maze_generation_algorithm#Cellular_automaton_algorithms)
 - [ ] Create weighted graphs from mazes
 - Solve mazes
   - [ ] Solver interface
-  - [ ] [Breadth-first search](https://www.wikiwand.com/en/Breadth-first_search)
-  - [ ] [Dijkstra's algorithm](https://www.wikiwand.com/en/Dijkstra's_algorithm)
-  - [ ] [Bellman–Ford algorithm](https://www.wikiwand.com/en/Bellman–Ford_algorithm)
-  - [ ] [A* search algorithm](https://www.wikiwand.com/en/A*_search_algorithm)
-  - [ ] [Floyd–Warshall algorithm](https://www.wikiwand.com/en/Floyd-Warshall_algorithm)
-  - [ ] [Johnson's algorithm](https://www.wikiwand.com/en/Johnson's_algorithm)
-  - [ ] [Viterbi algorithm](https://www.wikiwand.com/en/Viterbi_algorithm)
+  - [ ] [Breadth-first search](https://en.wikipedia.org/wiki/Breadth-first_search)
+  - [ ] [Dijkstra's algorithm](https://en.wikipedia.org/wiki/Dijkstra's_algorithm)
+  - [ ] [Bellman–Ford algorithm](https://en.wikipedia.org/wiki/Bellman–Ford_algorithm)
+  - [ ] [A* search algorithm](https://en.wikipedia.org/wiki/A*_search_algorithm)
+  - [ ] [Floyd–Warshall algorithm](https://en.wikipedia.org/wiki/Floyd-Warshall_algorithm)
+  - [ ] [Johnson's algorithm](https://en.wikipedia.org/wiki/Johnson's_algorithm)
+  - [ ] [Viterbi algorithm](https://en.wikipedia.org/wiki/Viterbi_algorithm)
 
 ### Installing Dependencies
 
