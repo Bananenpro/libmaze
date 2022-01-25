@@ -17,7 +17,7 @@ All registered callbacks are called once one of the following conditions is met:
 - The last call was more than `maxCallbackInterval` milliseconds ago
 - The stage changed
 
-## What arguments are passed to the callback functions
+## What arguments are passed to the callback functions?
 
 Three arguments are passed to the callback functions:
 
