@@ -12,7 +12,7 @@ A simple and extensible C++20 library for creating and solving mazes.
   - [x] PNGExporter
     - Create png image files showing the maze
   - [ ] MinecraftExporter
-    - Create datapacks which generates the maze in-game
+    - Create datapacks which generate the maze in-game
   - [ ] JSONExporter
     - Create json files representing the maze
 - Load mazes
