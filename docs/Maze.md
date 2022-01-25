@@ -6,12 +6,10 @@ Header: [`maze.h`](../src/maze.h)
 
 You can access and manipulate the contents of the maze using two different
 coordinate systems or 'grid types'.
-- The first is `GridType::ALL`, which includes all cells **and** walls as they
-would be displayed for example
-in an image.
+- The first is `GridType::ALL`, which includes all cells **and** walls.
 - The second is `GridType::CELLS`, which includes **only** the cells
 
-In the image below all cells are marked white and all walls are marked gray:
+In the image below all cells are colored white and all walls are colored gray:
 
 ![Couldn't load image](images/grid_types.png)
 
@@ -40,7 +38,8 @@ A value in the maze can be accessed either by supplying a point or a position.
 bottom and start at 0\
 |(0,0)|(1,0)|(2,0)|(3,0)|(4,0)|\
 |(0,1)|(1,1)|(2,1)|(3,1)|(4,1)|
-- A position represents the number of the value counting row by row\
+- A position represents the index of the value counting left to right/top to
+bottom\
 |0|1|2|3|4|\
 |5|6|7|8|9|
 
