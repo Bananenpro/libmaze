@@ -2,6 +2,8 @@
 
 An extensible C++20 library for creating and solving mazes.
 
+**NOTE:** This library currently has some serious performance issues. I'm currently occupied with other projects. I don't kown when or if I will revisit this project.
+
 ### [Documentation](docs/Home.md)
 
 ### Features
